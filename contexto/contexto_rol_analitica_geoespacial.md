@@ -121,3 +121,21 @@ sobre la cual se deben anclar todos los indicadores y tablas de tendencia.
 
 > Nota: la gestion del entorno Python sigue siendo con `uv` (entorno unico), por lo que
 > el `.gitignore` debe contemplar los artefactos propios de `uv`/entornos virtuales.
+
+---
+
+## 6. Convencion de Versionado Automatico
+
+- **Auto-commit y auto-push:** cada vez que se realice un cambio en los archivos del
+  proyecto (codigo, notebooks, contexto, configuracion, etc.), se debe **actualizar el
+  repositorio automaticamente sin pedir confirmacion** al usuario.
+- Flujo esperado tras cada cambio:
+  1. `git add` de los archivos modificados (preferir archivos especificos, no `git add .`).
+  2. `git commit` con un mensaje claro y descriptivo del cambio realizado.
+  3. `git push` a la rama de trabajo (`origin main`), **sin forzar**.
+- **Excepciones de seguridad que se mantienen:**
+  - Nunca versionar datos sensibles / PII (los `.xlsx` de ciudadanos siguen ignorados
+    por `.gitignore`).
+  - Los notebooks se versionan **sin outputs** (para no filtrar datos personales).
+  - No usar `push --force`, `reset --hard` ni comandos destructivos de git sin peticion
+    explicita.
