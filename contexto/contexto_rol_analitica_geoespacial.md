@@ -139,3 +139,98 @@ sobre la cual se deben anclar todos los indicadores y tablas de tendencia.
   - Los notebooks se versionan **sin outputs** (para no filtrar datos personales).
   - No usar `push --force`, `reset --hard` ni comandos destructivos de git sin peticion
     explicita.
+
+---
+
+## 7. Colores Accesibles para Daltonismo (paleta Okabe-Ito)
+
+> Convencion visual de TODO el proyecto ITT (Ciudad Paraiso, San Fernando, Pulmon de
+> Oriente, Barrio Obrero, etc.). El objetivo es que cualquier grafico, mapa o tabla sea
+> legible para personas con las tres formas de daltonismo (protanopia, deuteranopia,
+> tritanopia) y tambien en escala de grises.
+>
+> La paleta Okabe-Ito es la guia base. Se permite proponer otros colores o gamas siempre
+> que mantengan el mismo criterio de accesibilidad (distinguibles por daltonismo y en
+> escala de grises, colormaps perceptualmente uniformes para magnitud).
+
+La paleta se define una sola vez en la celda de configuracion visual y se reutiliza en
+todas las graficas.
+
+### 7.1 Definicion de la paleta (hex)
+
+| Constante     | Hex      | Color          | Uso en el proyecto                                    |
+|---------------|----------|----------------|-------------------------------------------------------|
+| OKI_AZUL      | #0072B2  | Azul fuerte    | Hurtos; nivel "Escala"; ano base en radar/ITT; DE     |
+| OKI_NARANJA   | #E69F00  | Naranja        | Siniestralidad; nivel "Consolidacion"; score EU prom. |
+| OKI_VERDE     | #009E73  | Verde          | Rinas; NDVI/arbolado; nivel "Transformacion"          |
+| OKI_AMARILLO  | #F0E442  | Amarillo       | SPA                                                   |
+| OKI_AZUL_C    | #56B4E9  | Azul cielo     | Lesionados (movilidad)                                |
+| OKI_BERMELL   | #D55E00  | Bermellon/rojo | Homicidios; mortales; nivel "Activacion"              |
+| OKI_MORADO    | #CC79A7  | Rosa/morado    | VIF (violencia intrafamiliar)                         |
+| OKI_GRIS      | #333333  | Gris oscuro    | Ejes, lineas de referencia, anotaciones neutras       |
+
+Color de fondo de figuras: `BG = "#F4F6F9"` (gris muy claro); ejes con `facecolor` blanco.
+
+### 7.2 Mapeo semantico de niveles ITT (NIVEL_COLORS)
+
+Los 4 niveles de transformacion tienen color fijo (coherente en todas las zonas):
+
+- Activacion     -> OKI_BERMELL (#D55E00)
+- Consolidacion  -> OKI_NARANJA (#E69F00)
+- Transformacion -> OKI_VERDE   (#009E73)
+- Escala         -> OKI_AZUL    (#0072B2)
+
+### 7.3 Bandas de fondo del ITT global (version suave, pastel)
+
+Para las franjas horizontales 0-40 / 40-60 / 60-80 / 80-100 del grafico ITT se usan tonos
+pastel (no los Okabe-Ito saturados), con alpha bajo para que no compitan con las barras:
+
+- 0-40   Activacion     -> #FFCDD2 (rojo pastel)
+- 40-60  Consolidacion  -> #FFE0B2 (naranja pastel)
+- 60-80  Transformacion -> #C8E6C9 (verde pastel)
+- 80-100 Escala         -> #BBDEFB (azul pastel)
+
+### 7.4 Mapas de calor (heatmaps)
+
+Para matrices (indicadores x trimestre) NO se usa la paleta categorica Okabe-Ito, sino el
+colormap perceptualmente uniforme y apto para daltonismo **`cividis`** de matplotlib
+(azul -> amarillo). Lineas de celda en #DEE2E6.
+
+### 7.5 Reglas de uso
+
+- Cada indicador tiene un color fijo asignado (ej. VIF siempre morado, homicidios siempre
+  bermellon), para que el lector asocie color <-> indicador en todas las graficas y zonas.
+- Para codificar magnitud/continuo: colormaps uniformes (cividis, viridis), **nunca
+  jet/rainbow** (no son perceptualmente uniformes ni aptos para daltonismo).
+- Fondo claro uniforme (#F4F6F9) + ejes sin spines superior/derecho + grid alpha 0.3.
+- Fuente DejaVu Sans.
+- En mapas coropleticos web (Folium/Leaflet) aplicar el mismo criterio: escalas
+  secuenciales/divergentes aptas para daltonismo y leyendas legibles.
+
+### 7.6 Snippet de definicion (como esta en el notebook)
+
+```python
+# Paleta Okabe-Ito (accesible para daltonismo) - misma paleta que el resto del proyecto
+OKI_AZUL     = "#0072B2"
+OKI_NARANJA  = "#E69F00"
+OKI_VERDE    = "#009E73"
+OKI_AMARILLO = "#F0E442"
+OKI_AZUL_C   = "#56B4E9"
+OKI_BERMELL  = "#D55E00"
+OKI_MORADO   = "#CC79A7"
+OKI_GRIS     = "#333333"
+BG = "#F4F6F9"
+
+NIVEL_COLORS = {
+    "Activacion":     OKI_BERMELL,
+    "Consolidacion":  OKI_NARANJA,
+    "Transformacion": OKI_VERDE,
+    "Escala":         OKI_AZUL,
+}
+```
+
+> Nota de coherencia con el mapa de visitas actual: el mapa web usa un semaforo
+> ROJO/AMARILLO/VERDE. Si se busca maxima accesibilidad, considerar migrar ese semaforo
+> hacia la logica Okabe-Ito (p. ej. bermellon #D55E00 / naranja #E69F00 / verde #009E73,
+> o un esquema azul-naranja mas robusto para daltonismo rojo-verde), manteniendo iconos o
+> texto como refuerzo ademas del color.
