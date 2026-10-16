@@ -1,0 +1,45 @@
+# ============================================================
+# .gitignore - Proyecto Mapa Analitico Ciudad Paraiso
+# ============================================================
+
+# ------------------------------------------------------------
+# DATOS SENSIBLES / PII (NO versionar)
+# Archivos con datos personales de ciudadanos y hogares.
+# Se excluyen por defecto para evitar exponer informacion
+# personal en el repositorio remoto (habeas data).
+# ------------------------------------------------------------
+data/*.xlsx
+data/**/*.xlsx
+data/*.csv
+data/**/*.csv
+
+# Nota: la geometria del territorio (GeoJSON de manzanas y
+# poligono) NO es dato personal y SI se versiona. Si algun
+# GeoJSON contiene atributos sensibles, excluirlo aqui.
+
+# ------------------------------------------------------------
+# Entorno Python gestionado con uv (entorno unico)
+# ------------------------------------------------------------
+.venv/
+venv/
+env/
+.uv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# ------------------------------------------------------------
+# Sistema operativo / editores
+# ------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# ------------------------------------------------------------
+# Logs y temporales
+# ------------------------------------------------------------
+*.log
+*.tmp
