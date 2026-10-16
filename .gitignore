@@ -24,6 +24,10 @@ datos/
 Mapa_Visitas_Ciudad_Paraiso.html
 **/mapa_data.json
 
+# Salidas regenerables del pipeline de geoanalitica (se reconstruyen al
+# ejecutar el notebook). No se versionan.
+data_processed_geo/
+
 # Nota: la geometria del territorio (GeoJSON de manzanas y
 # poligono) NO es dato personal y SI se versiona. Si algun
 # GeoJSON contiene atributos sensibles, excluirlo aqui.

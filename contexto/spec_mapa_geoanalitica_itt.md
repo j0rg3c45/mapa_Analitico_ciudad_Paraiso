@@ -132,4 +132,31 @@ Al momento de redactar esta spec, el workspace NO contiene:
   de Ciudad Paraiso ya disponibles en `data/geojson/`).
 
 Para ejecutar el pipeline se necesita incorporar esos insumos al proyecto (o indicar su
-ruta). Mientras tanto, esta spec queda como guia de implementacion.
+ruta).
+
+---
+
+## 8. Implementacion actual
+
+Notebook: `notebooks/02_mapa_geoanalitica_itt.ipynb` (22 celdas, ejecutable de punta a
+punta en el entorno `uv`).
+
+- Unidad espacial: manzana catastral real de `data/catastral/MANZANAS_U_2024.shp`
+  (28 manzanas).
+- Indicadores catastrales REALES por manzana: numero de predios (de TERRENOS), numero de
+  construcciones y pisos promedio/max (de CONSTRUCCION), area en m2 y densidad predial.
+  Clave de union `IDMANZANA` = COMUNA(2)+BARRIO(2)+MANZANA(4) (se deriva en CONSTRUCCION,
+  que no la trae).
+- Eventos ITT (hurtos, homicidios, rinas, lesionados, siniestros, SPA, VIF, arbolado,
+  NDVI): SINTETICOS, aislados en la celda 4 (`DATOS_SINTETICOS = True`). Reemplazar solo
+  esa celda al llegar datos reales.
+- Indice ITT (5 dimensiones: seguridad, convivencia, movilidad, ambiente, consolidacion
+  urbana) y clasificacion en los 4 niveles.
+- Salidas a `data_processed_geo/` (ignorada por git, regenerable):
+  `manzanas_itt.geojson`, `manzanas_itt.parquet`, `mapa_geoanalitica_itt.html`.
+- Mapa Folium: 4 capas base conmutables (OSM activa), contorno activo al inicio, coropleta
+  por nivel ITT, simbolos proporcionales (hurtos) y VIF como HeatMap. Popups enriquecidos
+  con mini-graficas SVG, badge de nivel y tabla de variacion T0 vs T-1. Paleta Okabe-Ito.
+- Dependencias: `uv run --with geopandas --with folium --with pyarrow ...`.
+- Verificado: ejecuta sin errores y genera los 3 artefactos. El HTML contiene las 4 capas,
+  el HeatMap y la leyenda.
