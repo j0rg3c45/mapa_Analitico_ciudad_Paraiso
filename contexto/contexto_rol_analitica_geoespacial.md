@@ -234,3 +234,69 @@ NIVEL_COLORS = {
 > hacia la logica Okabe-Ito (p. ej. bermellon #D55E00 / naranja #E69F00 / verde #009E73,
 > o un esquema azul-naranja mas robusto para daltonismo rojo-verde), manteniendo iconos o
 > texto como refuerzo ademas del color.
+
+---
+
+## 8. Contexto Catastral (LADM-COL / IGAC)
+
+Material de referencia catastral agregado en `contexto/contexto_catastral/`. Define el
+modelo de datos oficial de catastro-registro de Colombia (LADM-COL v4.1, IGAC) y sirve
+como diccionario para interpretar y enriquecer los atributos del territorio.
+
+### 8.1 Archivos
+
+- `Modelo_Extendido_LADMCOL_Cat_Reg_V4_1.ili` / `.uml` / `.pdf`: modelo extendido
+  catastro-registro (clases, atributos y dominios). Formato INTERLIS 2.3.
+- `LADM_COL_v_4_0_1_Nucleo_0.ili`: nucleo LADM-COL (clases base COL_*).
+- `Submodelo_Cartografia_Catastral_V1_1.ili`: cartografia de referencia (limites
+  operativos: manzana, barrio, sector, comuna, vias, perimetro urbano).
+- `ISO19107_PLANAS_V3_1_0.ili`: tipos geometricos planos (GM_Surface, GM_MultiSurface,
+  GM_MultiCurve, etc.).
+- `Diccionario_de_Datos_Modelo_Extendido_Catastro_Registro_v4_1.pdf`: diccionario de
+  datos del modelo.
+- `IN-GCT-PC01-06 Identificacion Predial_0.pdf`: instructivo de identificacion predial
+  (estructura del Numero Predial Nacional, 201 paginas).
+- `general_destinacion_economica.txt`: tabla de dominio de destinacion economica
+  (codigos LADM, ej. Habitacional=A, Comercial=C, Industrial=B, Institucional=I, etc.).
+
+### 8.2 Clases clave del submodelo de cartografia (LimitesOperativosCatastro)
+
+Unidades espaciales administrativas, todas con geometria `GM_MultiSurface3D`:
+
+- `CC_Manzana` (Codigo TEXT*17): unidad base del proyecto. Delimitada por calles.
+- `CC_Barrio` (Codigo TEXT*13, Nombre).
+- `CC_SectorUrbano` / `CC_SectorRural` (Codigo TEXT*9).
+- `CC_LocalidadComuna` (Codigo TEXT*11, Nombre).
+- `CC_PerimetroUrbano`, `CC_CentroPoblado`, `CC_Corregimiento`, `CC_Vereda`,
+  `CC_LimiteMunicipio`.
+- `CC_NomenclaturaVial` (geometria de linea `GM_MultiCurve3D`): tipos de via
+  (Calle, Carrera, Avenida, Diagonal, Transversal, etc.) + Numero_Via.
+
+### 8.3 Clases clave del modelo extendido (TOPIC Catastro_Registro)
+
+- `CR_Predio`: clase central. Identificado por **Numero_Predial_Nacional** (30 digitos,
+  obligatorio) y `Codigo_Homologado` (11), opcional `NUPRE`. Atributos relevantes para
+  analitica territorial: `Direccion`, `Area_Catastral_Terreno` (m2), `Area_Registral_M2`,
+  `Destinacion_Economica`, `Tipo_Predio`, `Condicion_Predio`, `Matricula_Inmobiliaria`,
+  `Avaluo` (BAG de `CR_EstructuraAvaluo`), `Estado`, `Vigencia_Actualizacion_Catastral`.
+- `CR_Terreno`: geometria poligonal del predio (extension espacial).
+- `CR_UnidadConstruccion` + `CR_CaracteristicasUnidadConstruccion`: edificaciones (uso,
+  tipologia, pisos).
+- `CR_Interesado`: propietario / poseedor / ocupante.
+- `CR_Derecho` / `CR_Restriccion` / `CR_Responsabilidad` (DRR): relacion juridica
+  interesado <-> predio.
+- `CR_FuenteAdministrativa` / `CR_FuenteEspacial`: documentos y fuentes.
+- `CR_Lindero` / `CR_PuntoLindero` / `CR_PuntoControl`: linderos y puntos.
+
+### 8.4 Numero Predial Nacional (NPN, 30 digitos)
+
+Estructura jerarquica que permite anclar predios al territorio: Departamento (2) +
+Municipio (3) + ... + Sector + Manzana/Vereda + Terreno + Condicion + Edificio + Piso +
+Unidad. Util para hacer joins espaciales/jerarquicos entre predios, manzanas y sectores.
+
+### 8.5 Uso previsto en el proyecto
+
+- Interpretar y normalizar atributos de los GeoJSON de manzanas segun el estandar oficial.
+- Enriquecer popups con destinacion economica, area, tipo de predio y uso del suelo.
+- Fundamentar joins espaciales predio -> manzana -> sector -> comuna.
+- Garantizar coherencia de CRS: calculos metricos en EPSG:9377, capa web en EPSG:4326.
