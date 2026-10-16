@@ -12,6 +12,17 @@ data/*.xlsx
 data/**/*.xlsx
 data/*.csv
 data/**/*.csv
+*.xlsx
+
+# Carpeta de trabajo que el notebook genera al ejecutarse: imita el
+# bucket (raw/ con los .xlsx copiados y curated/ con las salidas).
+# Contiene PII copiada, por lo que NO se versiona en ninguna ubicacion.
+datos/
+**/datos/
+
+# Mapas HTML generados a partir de datos (pueden incrustar PII).
+Mapa_Visitas_Ciudad_Paraiso.html
+**/mapa_data.json
 
 # Nota: la geometria del territorio (GeoJSON de manzanas y
 # poligono) NO es dato personal y SI se versiona. Si algun

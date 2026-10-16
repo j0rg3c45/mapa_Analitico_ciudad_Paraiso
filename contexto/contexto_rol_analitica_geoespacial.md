@@ -259,6 +259,21 @@ como diccionario para interpretar y enriquecer los atributos del territorio.
 - `general_destinacion_economica.txt`: tabla de dominio de destinacion economica
   (codigos LADM, ej. Habitacional=A, Comercial=C, Industrial=B, Institucional=I, etc.).
 
+### 8.1.b Shapefiles catastrales en `data/catastral/`
+
+Capas catastrales urbanas 2024 (shapefiles con `.shp/.dbf/.prj/.shx/...`):
+
+- `MANZANAS_U_2024`: manzanas catastrales.
+- `TERRENOS_U_2024`: terrenos / predios (geometria de `CR_Terreno`).
+- `CONSTRUCCION_U_2024`: construcciones / edificaciones.
+- `UNIDADES_U_2024`: unidades de construccion (pisos / unidades prediales).
+- `ANEXOS_U_2024`: anexos.
+
+**CRS de estos shapefiles:** `MAGNA_Cali_Valle_del_Cauca_2009` (origen cartesiano local
+IGAC para Cali, en metros; NO es EPSG:9377 ni WGS84). Antes de usarlos en la capa web hay
+que reproyectar a WGS84 (EPSG:4326). Para calculos metricos pueden usarse en su CRS local
+o reproyectarse a EPSG:9377 segun convenga; documentar la decision en cada pipeline.
+
 ### 8.2 Clases clave del submodelo de cartografia (LimitesOperativosCatastro)
 
 Unidades espaciales administrativas, todas con geometria `GM_MultiSurface3D`:
