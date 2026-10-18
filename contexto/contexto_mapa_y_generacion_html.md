@@ -222,12 +222,15 @@ interactivo de eventos de seguridad con panel colapsable de serie de tiempo.
 - Salida: `data_processed_geo/mapa_seguridad_calor.html` (~11.2 MB; pesa por las capas de
   puntos, que arrancan apagadas).
 
-### 7.2 Heatmap (paleta INFERNO, apta daltonismo)
+### 7.2 Heatmap (gradiente por capa, rampas ColorBrewer aptas daltonismo)
 
 - Un `HeatMap` (folium.plugins) por categoria, conmutable. Hurtos activo por defecto.
-- Gradiente **INFERNO** (perceptualmente uniforme, apto daltonismo, mejor contraste que
-  cividis sobre el mapa): `{0.0:#000004, 0.25:#420a68, 0.5:#932667, 0.75:#dd513a,
-  0.9:#fca50a, 1.0:#fcffa4}`.
+- Cada capa tiene su **propio gradiente secuencial** (varia en luminosidad dentro de un
+  matiz, intenso = oscuro; distinguibles entre si y en escala de grises):
+  - Hurtos -> **Blues**: `{0:#eff3ff, 0.4:#9ecae1, 0.7:#4292c6, 1:#08306b}`.
+  - Comparendos -> **Greens**: `{0:#edf8e9, 0.4:#a1d99b, 0.7:#41ab5d, 1:#00441b}`.
+  - Homicidios -> **Reds**: `{0:#fee5d9, 0.4:#fcae91, 0.7:#fb6a4a, 1:#67000d}`.
+  - Coherente con la paleta Okabe-Ito por categoria (azul/verde/rojo).
 - Parametros ajustados a la zona compacta (~26 ha): `radius=18`, `blur=14`,
   `min_opacity=0.35`. Solo puntos dentro del poligono.
 - Capas de puntos (CircleMarker) por categoria, apagadas por defecto, popups SIN PII
