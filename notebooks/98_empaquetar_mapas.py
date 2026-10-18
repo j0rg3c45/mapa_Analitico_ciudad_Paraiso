@@ -38,6 +38,7 @@ INCLUIR = [
     "mapa_desarrollo_economico.html",
     "mapa_vivienda.html",
     "mapa_ipm.html",
+    "mapa_ics.html",
 ]
 
 # README que viaja dentro del ZIP.
@@ -70,6 +71,7 @@ Que contiene
 - mapa_desarrollo_economico.html ...... Desarrollo economico (negocios, educacion).
 - mapa_vivienda.html .................. Vivienda (deficit habitacional por barrio).
 - mapa_ipm.html ....................... IPM (pobreza multidimensional por manzana).
+- mapa_ics.html ....................... ICS (condicion social por manzana).
 
 Como usar cada mapa
 -------------------

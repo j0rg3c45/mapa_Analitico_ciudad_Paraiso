@@ -723,3 +723,30 @@ manzana, recortado a Ciudad Paraiso. Salida: `mapa_html/mapa_ipm.html` (~0.9 MB)
 - Capas transversales ITT (limite, manzanas, Fray Damian, demoliciones), capas base
   Google/Esri, mascara, boton "Exportar lamina (deck)". No lleva slider de calor (no hay
   heatmap). Celda 0 "Setup Colab".
+
+---
+
+## 20. Mapa de ICS - Condicion Social (notebook 10) y leyendas de paleta
+
+### 20.1 Mapa ICS (nb 10)
+Notebook `notebooks/10_mapa_ics.ipynb`. Coropleta del Indice de Condicion Social por
+manzana. Fuente: `data/geojson/ICS_ciudad_Paraiso.geojson` (33 manzanas, columna `ics`).
+Salida: `mapa_html/mapa_ics.html`.
+- Indicador DIRECTO (mayor = mejor). Escala oficial de **8 categorias** (ver
+  `contexto_ipm_ics.md`), paleta **cividis**.
+- Incluye **leyenda de paleta** flotante (abajo-derecha) con las 8 categorias y sus rangos,
+  panel con resumen + distribucion de manzanas por categoria (Chart.js), capas
+  transversales ITT y boton "Exportar lamina (deck)".
+
+### 20.2 Leyendas de paleta
+- Mapa ICS: leyenda cividis de 8 categorias.
+- Laboratorio (nb 09): leyenda DOBLE (IPM viridis + ICS cividis) abajo-derecha.
+- Fuente oficial IPM/ICS: `data/geojson/IPM_ciudad_Paraiso.geojson` (trae ipm, ics y las 15
+  variables) e `ICS_ciudad_Paraiso.geojson`. Ambas livianas (~140 KB), se versionan en el
+  repo (datos agregados por manzana, sin PII), por lo que Colab las obtiene con el clone.
+
+### 20.3 Pendiente
+- Migrar el mapa de IPM dedicado (nb 08) a la fuente oficial + escala viridis de 8
+  categorias + leyenda (hoy usa la fuente anterior y rampa RdPu).
+- Actualizar la capa de referencia IPM (`_add_ipm_ref`) en los mapas 02-07 a la fuente
+  oficial.

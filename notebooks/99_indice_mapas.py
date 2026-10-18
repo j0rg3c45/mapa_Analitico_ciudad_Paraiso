@@ -27,6 +27,7 @@ if OUT_DIR is None:
 # Paleta Okabe-Ito.
 OKI_AZUL, OKI_NARANJA, OKI_VERDE = "#0072B2", "#E69F00", "#009E73"
 OKI_MORADO, OKI_BERMELL, OKI_GRIS = "#CC79A7", "#D55E00", "#333333"
+OKI_AZUL_C = "#56B4E9"
 DORADO, BG = "#8A6D1A", "#F4F6F9"
 
 # Catalogo de mapas: (archivo, dimension, peso, descripcion, color).
@@ -47,6 +48,8 @@ CATALOGO = [
      "Deficit habitacional por barrio (SISBEN), coropleta.", OKI_BERMELL),
     ("mapa_ipm.html", "IPM - Pobreza multidimensional", None,
      "Indice de Pobreza Multidimensional por manzana y variables de privacion.", OKI_MORADO),
+    ("mapa_ics.html", "ICS - Condicion social", None,
+     "Indice de Condicion Social por manzana (escala 8 categorias, cividis).", OKI_AZUL_C),
 ]
 
 # Dimensiones sin datos todavia (se muestran deshabilitadas).
