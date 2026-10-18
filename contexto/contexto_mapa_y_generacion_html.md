@@ -482,3 +482,60 @@ Orden definido (de primera a ultima en el panel):
 
 Regla general del orden: limite > manzanas > CAI > puntos/eventos > NDVI > deficit/fondo.
 Las capas base (TileLayer) y la mascara oscura van antes y no son overlays conmutables.
+
+---
+
+## 13. Interactividad, export y simbologia (estado consolidado de los mapas)
+
+Resumen de los ajustes de visualizacion aplicados a los mapas (principalmente seguridad
+`m_seg` y entorno urbano `m_eu`; los de ITT/avance comparten la base comun).
+
+### 13.1 Exportacion de laminas (JPG / PDF)
+- Funcion reutilizable `agregar_export(mapa, titulo, slug)` en ambos notebooks. Botones
+  "Exportar JPG" y "Exportar PDF" (esquina superior derecha). Librerias html2canvas@1.4.1
+  y jsPDF@2.5.1 por CDN. Una figura por clic. Nombre: `ITT_<slug>_<AAAA-MM-DD>`.
+- **Captura la VISTA ACTUAL** del usuario: NO re-centra con fitBounds (se elimino la
+  llamada a `ajustarZona`). El encuadre/zoom/capas que el usuario deja en pantalla es lo
+  que se descarga.
+- Durante la captura: se ocultan los botones de export, el selector de capas
+  (`.leaflet-control-layers`) y los tiles base; se pinta fondo claro #F4F6F9; se inserta un
+  encabezado temporal (titulo + "Corte: fecha" + "Fuente: ITT Ciudad Paraiso - CDO
+  Alcaldia de Santiago de Cali"); se restaura todo despues.
+- El panel de graficas de tendencia SI sale en la lamina (no se oculta).
+- Limitacion (decision B): el mapa base (Google/Esri) NO sale en la lamina por CORS; la
+  captura va sobre fondo claro con overlays + panel + leyenda. Para mapa base real haria
+  falta OSM-con-CORS o render desde Python.
+
+### 13.2 Zoom
+- `zoom_start=16`, `zoom_snap=0.25`, `zoom_delta=0.1` (pasos finos para escalas
+  intermedias 60/70/80/90 m), `max_zoom=22`, tiles `max_native_zoom=20`.
+- Los mapas inician con `fit_bounds` al poligono de Ciudad Paraiso
+  `[[3.442445,-76.53259],[3.44791,-76.526004]]` con padding (30,30).
+
+### 13.3 Simbologia estandar
+- **Limite Ciudad Paraiso**: unico, borde #8A6D1A, weight 5, dashArray "10 6", sin
+  relleno; unica capa activa al inicio.
+- **ITT: manzanas (consolidado)**: SIN relleno (`fill: False`), solo contorno gris
+  weight 1.0 (se quito el relleno azul pastel).
+- **Estacion Fray Damian**: sin relleno, borde azul #0072B2 continuo weight 2.75.
+- **Demoliciones Cristo Rey**: clasificadas por `demolicion` (Demolido=#D55E00,
+  Programado=#E69F00, En proceso=#F0E442, Sin programar=#009E73), fillOpacity 0.65.
+
+### 13.4 Slider de intensidad del heatmap
+- Control deslizante "Intensidad del calor" (esquina inferior derecha) en los mapas con
+  HeatMap (seguridad y entorno urbano). Ajusta en runtime el radius/blur de las capas de
+  calor via `setOptions`, SIN cambiar la definicion base (seguridad radius=18/blur=14;
+  entorno radius=22/blur=16) ni los gradientes. Valor inicial del slider: 18 (seguridad),
+  22 (entorno). Afecta todas las heat layers a la vez; no afecta coropletas ni graficas.
+
+### 13.5 Filtro temporal de la capa de PUNTOS (solo seguridad)
+- Las capas "Puntos: hurto/comparendo/homicidio" muestran SOLO eventos con fecha
+  >= 2025-09-01 (2026 completo + desde septiembre 2025): hurto 136, comparendo 2580,
+  homicidio 6 (total 2722 de 8450).
+- Los **mapas de calor** (HeatMap) y las **graficas de tendencia** NO se filtran: siguen
+  usando todos los eventos (8450, 2023-2026).
+
+### 13.6 Panel de graficas
+- Posicion top:20px left:20px, fondo claro, redondeado, colapsable (`<details>`).
+  Seguridad: #seg-panel ("Seguridad - resumen", series anual doble eje con Chart.js).
+  Entorno urbano: #eu-panel (serie NDVI anual).
