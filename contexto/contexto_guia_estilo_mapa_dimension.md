@@ -165,6 +165,13 @@ Opcional segun dimension: `ITT: homicidios <=300m estacion`
 (`12_estacion_fray_damian_homicidios_300m.geojson`, puntos popup SIN PII) cuando el
 tema lo amerite (seguridad).
 
+Capa de referencia adicional (TAMBIEN en todos los mapas, apagada):
+`Ref IPM: pobreza por manzana` -> coropleta del IPM recortado a la zona
+(`data/geojson/Mzn_ipm_variables.geojson`, 33 manzanas), rampa RdPu, `fillOpacity 0.55`.
+Sirve como contexto socioeconomico comun. Codigo: funcion `_add_ipm_ref()` que resuelve
+la ruta (local y Colab), recorta a la zona y arma la capa apagada; se agrega al orden
+justo despues de `_fg_manzanas`. El mapa dedicado de IPM es `notebooks/08_mapa_ipm.ipynb`.
+
 El codigo de estas capas (funciones `_add_geojson_itt`, `_add_manzanas_itt`,
 `_add_demoliciones` y los popups) se reutiliza TAL CUAL del notebook 02 (celda 39);
 copiarlo en cada notebook de dimension y agregarlas en el orden de la seccion 7.
