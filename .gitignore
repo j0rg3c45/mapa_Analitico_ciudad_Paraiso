@@ -63,3 +63,8 @@ desktop.ini
 # de beneficiarios. NO versionar.
 data/5_Dimension_Entorno_Urbano/sec_vivienda/*SUBSIDIOS*.xlsx
 **/*SUBSIDIOS*.xlsx
+
+# Dataset ITT consolidado (data/1_data_itt): data original en uso local. Contiene
+# capas de homicidios con PII de victimas (direccion, sexo, edad, ocupacion).
+# NO versionar por ahora; la carga depurada al repo se decide mas adelante.
+data/1_data_itt/

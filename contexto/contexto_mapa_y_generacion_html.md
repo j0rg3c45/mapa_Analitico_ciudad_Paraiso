@@ -413,3 +413,42 @@ data/1_data_itt/
 - **Contexto operativo (no son dimensiones del ITT, son capas de apoyo):**
   `10` demoliciones Cristo Rey, `11` manzana de la estacion Fray Damian,
   `12` homicidios en radio de 300 m de la estacion.
+
+---
+
+## 11. Capas del dataset ITT en los mapas y ajustes de simbologia
+
+A los 2 mapas activos (seguridad `notebooks/02` celda del mapa de seguridad, y entorno
+urbano `notebooks/03`) se agregaron capas del dataset `data/1_data_itt/`, conmutables y
+apagadas al inicio, resolviendo ruta local y Colab.
+
+> Nota: `data/1_data_itt/` NO se versiona por ahora (ver `.gitignore`): es la data
+> original en uso local y contiene PII de homicidios. Se cargara al repo depurada mas
+> adelante. Primero se organizan mapas y contexto.
+
+### 11.1 Capas agregadas y su simbologia
+
+- **Limite Ciudad Paraiso** (`00`): UNICO limite oficial. Estilo homologado del poligono
+  anterior (dorado #8A6D1A, weight 5, dashArray "10 6", sin relleno). Se elimino la capa
+  duplicada "Poligono Ciudad Paraiso" (antes existia doble contorno).
+- **ITT: manzanas (consolidado)** (`01`): coropleta neutra azul claro. Tooltip y popup con
+  4 atributos: ID Manzana, Barrio, Manzana y Area. El area se recalcula en EPSG:9377 y se
+  formatea entera con separador de miles en punto (ej. "6.090 m2"). `GeoJsonTooltip` con
+  alias y `localize=True`.
+- **ITT: demoliciones Cristo Rey** (`10`): clasificada por la columna `demolicion` con
+  colores Okabe-Ito, fillOpacity 0.65, borde #333333 weight 0.8, estado en tooltip y
+  popup. Categorias: Demolido=#D55E00, Programado=#E69F00, En proceso=#F0E442,
+  Sin demolicion programada=#009E73.
+- **ITT: estacion Fray Damian** (`11`): solo contorno (fill=False), weight 3.5, azul
+  #0072B2.
+- **ITT: homicidios <=300m estacion** (`12`): puntos con popup SIN PII (solo fecha,
+  distancia, tipo de arma, movil).
+
+### 11.2 Notas tecnicas
+
+- Las capas con columnas de fecha (Timestamp) se convierten a texto antes de
+  `to_json()`/popup (folium no serializa Timestamp).
+- Estado del ITT en `01`: valor 58.5 uniforme y scores por dimension vacios (None); la
+  coropleta es neutra hasta calcular el ITT real por manzana (pendiente de fondo).
+- Metodologia del ITT documentada aparte en `contexto/contexto_itt_ciudad_paraiso.md`
+  (zona, pesos por dimension, verificacion espacial point-in-polygon).
