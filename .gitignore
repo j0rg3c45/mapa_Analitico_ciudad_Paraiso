@@ -68,3 +68,8 @@ data/5_Dimension_Entorno_Urbano/sec_vivienda/*SUBSIDIOS*.xlsx
 # capas de homicidios con PII de victimas (direccion, sexo, edad, ocupacion).
 # NO versionar por ahora; la carga depurada al repo se decide mas adelante.
 data/1_data_itt/
+
+# Laminas del deck generadas (JPG/PDF/PNG): salidas regenerables, no se versionan.
+# Se conserva la estructura de carpeta con .gitkeep.
+output/deck_output/*
+!output/deck_output/.gitkeep
