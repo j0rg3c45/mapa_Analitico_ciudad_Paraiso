@@ -138,5 +138,47 @@ columnas):
   muestran en el panel). ITT por manzana NO se calcula (decision vigente): la coropleta va
   con la simbologia disponible.
 
-Esto es un cambio de fondo del modo de export (de "captura del mapa" a "lamina compuesta");
-se implementara cuando el usuario lo confirme.
+Esto es un cambio de fondo del modo de export (de "captura del mapa" a "lamina compuesta").
+
+---
+
+## 7. PASO A implementado (boton unico "Exportar lamina (deck)")
+
+Estado: HECHO. Se reemplazaron los dos botones (JPG/PDF) por UN solo boton
+**"Exportar lamina (deck)"** en los 5 mapas (m, m_full, m_ejec, m_seg, m_eu).
+
+Comportamiento al pulsar (funcion `agregar_export(mapa, titulo, slug)`, identica en ambos
+notebooks):
+1. Captura solo el div del mapa con html2canvas, ocultando antes: los botones de export,
+   `.leaflet-control-layers`, los tiles base (`.leaflet-tile-pane`, fondo claro #F4F6F9 por
+   CORS), el panel flotante (#seg-panel/#eu-panel) y el slider de calor
+   (#heat-intensity-ctrl); restaura todo despues. Esa imagen es "el mapa".
+2. Construye un div temporal `id="deck-lamina"` (1200px, fondo blanco) con la estructura
+   del deck:
+   - Encabezado: titulo (20px bold) + linea de seccion, borde inferior dorado #8A6D1A.
+   - Cuerpo en grid 2 columnas (35% / 65%): izquierda = CLON del panel del mapa
+     (#seg-panel/#eu-panel) con sus cifras y serie (se le fuerza `open` en el `<details>` y
+     se le quita el position:fixed); derecha = la imagen del mapa.
+   - Pie: "Corte: " + fecha/hora + " | Fuente: ITT Ciudad Paraiso - CDO Alcaldia de
+     Santiago de Cali | Mapa ilustrativo".
+3. Captura `#deck-lamina` con html2canvas (scale 2) -> jsPDF landscape -> guardar con
+   showSaveFilePicker (dialogo "Guardar como"; fallback a descarga). Nombre
+   `deck_<slug>_<AAAA-MM-DD>.pdf`.
+4. Elimina el div-lamina temporal al terminar o ante error.
+
+Notas:
+- Las cifras de la columna izquierda salen del panel existente de cada mapa (no se
+  recalculan). Si un mapa no tuviera panel, muestra titulo + "Resumen no disponible"
+  (en la practica los mapas con panel son seguridad y entorno urbano).
+- CORS: la imagen del mapa no incluye el mapa base (tiles); va sobre fondo claro con
+  overlays/contorno/manzanas. Decision B vigente.
+
+## 8. Plan por partes (acordado con el usuario)
+
+- **A (HECHO):** boton unico "Exportar lamina (deck)".
+- **B (pendiente):** crear el mapa de la dimension que falta -> MOVILIDAD, con
+  `06_movilidad_siniestros` (97 puntos) y `07_movilidad_red_peatonal_osm` (400 lineas).
+- **C (pendiente):** migrar los mapas existentes a consumir los datos reales del dataset
+  `data/1_data_itt/` como fuente oficial (seguridad/convivencia desde 02-05/09, en vez de
+  `seguridad_unificado.geojson`). Confirmado: `1_data_itt` es la fuente oficial.
+- ITT por manzana: NO se calcula por ahora (decision vigente).
