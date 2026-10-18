@@ -102,3 +102,27 @@ control flotante en el mapa. Mantener el respaldo 3.3 para laminas de alta calid
 3. En que mapa(s) va el boton de export (seguridad, entorno urbano, un futuro mapa ITT
    resumen, o todos).
 4. Si se desea multi-lamina (un PDF con varias dimensiones) o una sola figura por descarga.
+
+---
+
+## 7. Implementacion realizada
+
+Funcion reutilizable `agregar_export(mapa, titulo, slug)` en ambos notebooks (02 y 03),
+llamada antes de cada `.save()`. Inyecta via CDN html2canvas@1.4.1 + jsPDF@2.5.1 y un
+control flotante (esquina superior derecha, z-index 10000) con botones "Exportar JPG" y
+"Exportar PDF". Presente en los 5 mapas: m (itt), m_full (avance), m_ejec
+(avance_ejecutivo), m_seg (seguridad), m_eu (entorno_urbano).
+
+Comportamiento al hacer clic:
+1. fitBounds a la union de capas vectoriales (centra la zona de estudio), espera 500 ms.
+2. Oculta tiles base (CORS: Google/Esri no se rasterizan; se pone fondo claro #F4F6F9) y
+   captura solo overlays + panel de graficas (#seg-panel/#eu-panel) + leyenda + encabezado.
+3. Inserta encabezado temporal: titulo + "Corte: " fecha actual + "Fuente: ITT Ciudad
+   Paraiso - CDO Alcaldia de Santiago de Cali".
+4. JPG: toDataURL('image/jpeg',0.95) -> ITT_<slug>_<AAAA-MM-DD>.jpg.
+5. PDF: jsPDF (una pagina, orientacion segun la imagen) -> ITT_<slug>_<AAAA-MM-DD>.pdf.
+6. Oculta los botones durante la captura y los restaura.
+
+Limitacion conocida: los tiles base NO salen en la lamina (se ocultan a proposito por
+CORS); se ve contorno, overlays activos, graficas y datos sobre fondo claro. Para laminas
+con foto satelital/callejero haria falta la via Python (matplotlib/selenium), como respaldo.
