@@ -575,7 +575,9 @@ Notebook `notebooks/04_mapa_movilidad.ipynb`. Mapa de la dimension Movilidad del
 - **Calor: siniestros** (HeatMap, rampa Oranges): usa TODOS los siniestros en zona.
 - **Red peatonal (OSM)**: lineas coloreadas por tipo de via (footway/pedestrian/
   residential/service/tertiary/secondary/primary), Okabe-Ito.
-- Comparte: capas base Google, mascara oscura, limite dorado, panel #mov-panel (serie anual
+- **Capas transversales ITT** (apagadas, salvo el limite): Limite Ciudad Paraiso (activo),
+  ITT manzanas (consolidado), ITT estacion Fray Damian, ITT demoliciones Cristo Rey.
+- Comparte: capas base Google, mascara oscura, panel #mov-panel (serie anual
   por severidad, eje unico), slider de calor, boton "Exportar lamina (deck)".
 
 ## 15. Dimension Desarrollo Social / Convivencia (notebook 05)
@@ -597,7 +599,9 @@ variables de la dimension (peso 19%: VIF + rinas + SPA). Salida:
 - **Puntos: rina / spa** (CircleMarker, verde / amarillo) filtrados a
   `fecha_evento >= 2025-09-01`. Popup SIN PII (fecha + sitio del hecho).
 - **Calor: rina / spa** (HeatMap, rampas Greens / YlOrBr): usan TODOS los eventos en zona.
-- Comparte: capas base Google, mascara oscura, limite dorado, panel #ds-panel (serie anual
+- **Capas transversales ITT** (apagadas, salvo el limite): Limite Ciudad Paraiso (activo),
+  ITT manzanas (consolidado), ITT estacion Fray Damian, ITT demoliciones Cristo Rey.
+- Comparte: capas base Google, mascara oscura, panel #ds-panel (serie anual
   de rinas y spa, eje unico), slider de calor, boton "Exportar lamina (deck)".
 
 > Nota: rinas y SPA tambien aparecen en el mapa de seguridad (notebook 02) como foto de

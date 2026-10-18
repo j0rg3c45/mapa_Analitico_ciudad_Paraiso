@@ -169,10 +169,10 @@ El codigo de estas capas (funciones `_add_geojson_itt`, `_add_manzanas_itt`,
 `_add_demoliciones` y los popups) se reutiliza TAL CUAL del notebook 02 (celda 39);
 copiarlo en cada notebook de dimension y agregarlas en el orden de la seccion 7.
 
-> **Estado al corte (pendiente):** `mapa_movilidad.html` (nb 04) y
-> `mapa_desarrollo_social.html` (nb 05) hoy SOLO incluyen `Limite Ciudad Paraiso`.
-> Falta agregarles las capas 2, 3 y 4 (manzanas, estacion Fray Damian, demoliciones)
-> para igualar al mapa de seguridad. Pendiente de implementar y regenerar los HTML.
+> **Estado al corte (HECHO):** `mapa_movilidad.html` (nb 04) y
+> `mapa_desarrollo_social.html` (nb 05) ya incluyen las 4 capas transversales (limite,
+> manzanas consolidado, estacion Fray Damian, demoliciones Cristo Rey), igualadas al
+> mapa de seguridad reutilizando el codigo del notebook 02.
 
 ---
 
