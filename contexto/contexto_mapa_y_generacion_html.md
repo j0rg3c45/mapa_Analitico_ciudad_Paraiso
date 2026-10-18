@@ -333,3 +333,83 @@ Cuatro mapas por proposito, misma arquitectura Folium + estandares comunes:
 
 Pendiente: proceso del deck PMU (ver `contexto_deck_reporte_pmu.md`); otras dimensiones
 del ITT (movilidad, desarrollo economico, desarrollo social) si llegan sus datos.
+
+---
+
+## 10. Dataset ITT consolidado (`data/1_data_itt/`)
+
+Dataset definitivo y consolidado del ITT, 13 capas GeoJSON numeradas por dimension, TODAS
+en **EPSG:4326**. Es la fuente de verdad mas completa y organizada del proyecto; sustituye
+a los insumos dispersos usados antes. Prefijo numerico = orden/dimension.
+
+| Archivo | n | Geometria | Contenido |
+|---|---|---|---|
+| `00_limite_ciudad_paraiso.geojson` | 1 | MultiPolygon | Limite/poligono de la zona |
+| `01_manzanas_itt_consolidado.geojson` | 28 | Polygon | Manzanas con ITT, nivel y scores por dimension |
+| `02_seguridad_homicidios.geojson` | 37 | Point | Homicidios (trae PII: direccion, sexo, edad, ocupacion) |
+| `03_seguridad_hurtos.geojson` | 722 | Point | Hurtos (dinamica, modalidad, titulo) |
+| `04_convivencia_rinas.geojson` | 253 | Point | Comparendos por rinas |
+| `05_convivencia_spa.geojson` | 350 | Point | Comparendos por sustancias psicoactivas |
+| `06_movilidad_siniestros.geojson` | 97 | Point | Siniestros viales (clase, placas, vehiculos) |
+| `07_movilidad_red_peatonal_osm.geojson` | 400 | LineString | Red peatonal (OSM: name, highway, length) |
+| `08_entorno_censo_arboreo.geojson` | 312 | Point | Censo arboreo (estado, especie) |
+| `09_seguridad_vif_calor_poligonal.geojson` | 28 | Polygon | VIF agregada por manzana (vif_casos, vif_densidad_ha, nota_privacidad) - sin puntos |
+| `10_demoliciones_cristo_rey_predios.geojson` | 100 | Polygon | Predios en plan de demolicion (NPN, fecha, estado, cronograma) |
+| `11_estacion_fray_damian_manzana.geojson` | 1 | Polygon | Manzana de la estacion de policia Fray Damian |
+| `12_estacion_fray_damian_homicidios_300m.geojson` | 17 | Point | Homicidios a <=300 m de la estacion (dist_a_estacion_m) |
+
+### 10.1 Capa clave: `01_manzanas_itt_consolidado`
+
+Columnas analiticas: `idmanzana`, `comuna`, `barrio`, `manzana`,
+`manzana_plan_cristorey`, `anio_referencia`, `itt`, `nivel`, y scores por dimension:
+`score_seguridad`, `score_movilidad`, `score_des_social`, `score_entorno_u`,
+`score_des_eco`, `nota`.
+
+**Estado actual (importante):** el `itt` viene en **58.5 para las 28 manzanas** (valor
+unico de zona, nivel "Consolidacion") y los `score_*` por dimension estan **vacios
+(None)**. Es decir, la estructura esta lista pero el ITT por manzana y los scores por
+dimension estan PENDIENTES de calcular/poblar.
+
+### 10.2 Dimensiones del ITT representadas
+
+Seguridad (homicidios, hurtos, VIF), Convivencia (rinas, SPA), Movilidad (siniestros, red
+peatonal), Entorno urbano (censo arboreo). Mas capas de contexto operativo: demoliciones
+Cristo Rey y estacion de policia Fray Damian (con homicidios en radio de 300 m).
+
+### 10.3 Nota de privacidad (PII)
+
+- `02_seguridad_homicidios` y `12_..._homicidios_300m` traen atributos personales
+  (direccion, sexo, edad, ocupacion). En cualquier mapa publicable, los homicidios deben
+  ir SIN esos campos en popups (solo fecha/tipo), o agregados.
+- VIF ya viene agregada por manzana (`09_...vif_calor_poligonal`), nunca como punto.
+- Evaluar que capas de `data/1_data_itt/` se versionan vs se ignoran segun contengan PII.
+
+### 10.4 Estructura de la carpeta (arbol)
+
+```
+data/1_data_itt/
+├── 00_limite_ciudad_paraiso.geojson                 0.9 KB  · 1 MultiPolygon  · limite de la zona
+├── 01_manzanas_itt_consolidado.geojson              161 KB  · 28 Polygon      · ITT + scores por dimension
+├── 02_seguridad_homicidios.geojson                  117 KB  · 37 Point        · homicidios (con PII)
+├── 03_seguridad_hurtos.geojson                     1009 KB  · 722 Point       · hurtos
+├── 04_convivencia_rinas.geojson                     464 KB  · 253 Point       · comparendos rinas
+├── 05_convivencia_spa.geojson                       718 KB  · 350 Point       · comparendos SPA
+├── 06_movilidad_siniestros.geojson                   95 KB  · 97 Point        · siniestros viales
+├── 07_movilidad_red_peatonal_osm.geojson            116 KB  · 400 LineString  · red peatonal (OSM)
+├── 08_entorno_censo_arboreo.geojson                 167 KB  · 312 Point       · censo arboreo
+├── 09_seguridad_vif_calor_poligonal.geojson         152 KB  · 28 Polygon      · VIF agregada por manzana
+├── 10_demoliciones_cristo_rey_predios.geojson       146 KB  · 100 Polygon     · predios en demolicion
+├── 11_estacion_fray_damian_manzana.geojson          2.9 KB  · 1 Polygon       · manzana estacion de policia
+└── 12_estacion_fray_damian_homicidios_300m.geojson   50 KB  · 17 Point        · homicidios a <=300m de la estacion
+```
+
+### 10.5 Organizacion por dimension
+
+- **Base / territorio:** `00` limite de la zona, `01` manzanas con ITT consolidado.
+- **Seguridad:** `02` homicidios, `03` hurtos, `09` VIF (agregada por manzana).
+- **Convivencia:** `04` rinas, `05` SPA.
+- **Movilidad:** `06` siniestros viales, `07` red peatonal (OSM).
+- **Entorno urbano:** `08` censo arboreo.
+- **Contexto operativo (no son dimensiones del ITT, son capas de apoyo):**
+  `10` demoliciones Cristo Rey, `11` manzana de la estacion Fray Damian,
+  `12` homicidios en radio de 300 m de la estacion.
