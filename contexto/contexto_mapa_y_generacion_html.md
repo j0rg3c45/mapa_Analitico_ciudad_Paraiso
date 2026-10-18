@@ -200,3 +200,72 @@ pueden derivarse de datos con PII).
 - Los eventos de seguridad/ambiente son **sinteticos** hasta integrar los datos reales;
   los popups lo advierten ("Datos de evento SINTETICOS (demo)"). Los indicadores
   catastrales y el avance de caracterizacion SI son reales.
+
+---
+
+## 7. Dimension Seguridad: mapa de calor y serie de tiempo
+
+Seccion 12 del notebook `02_mapa_geoanalitica_itt.ipynb`. Mapa de calor (heatmap)
+interactivo de eventos de seguridad con panel colapsable de serie de tiempo.
+
+### 7.1 Datos (reales, DATIC)
+
+- Fuentes crudas en `data/1_Dimension_Seguridad/` (6 GeoJSON, ~11.8 MB): comparendos,
+  homicidios y hurtos, cada uno en dos cortes (historico 2023-2026T1 + reciente 2026).
+- Unificado en `data/geojson/seguridad_unificado.geojson` (3.34 MB, EPSG:4326):
+  - **8.450 eventos** dentro de Ciudad Paraiso, rango **2023-01-01 a 2026-09-30**.
+  - Por categoria: **comparendo 7.695, hurto 718, homicidio 37**.
+  - Esquema: `fecha, anio, mes (YYYY-MM), categoria, subtipo, sitio, lat, lon, fuente, geometry`.
+  - 83 duplicados eliminados; sin columnas PII (nombre/documento/direccion).
+- Serie mensual agregada: `data_processed_geo/seguridad_serie_mensual.csv` (periodo,
+  categoria, conteo).
+- Salida: `data_processed_geo/mapa_seguridad_calor.html` (~11.2 MB; pesa por las capas de
+  puntos, que arrancan apagadas).
+
+### 7.2 Heatmap (paleta INFERNO, apta daltonismo)
+
+- Un `HeatMap` (folium.plugins) por categoria, conmutable. Hurtos activo por defecto.
+- Gradiente **INFERNO** (perceptualmente uniforme, apto daltonismo, mejor contraste que
+  cividis sobre el mapa): `{0.0:#000004, 0.25:#420a68, 0.5:#932667, 0.75:#dd513a,
+  0.9:#fca50a, 1.0:#fcffa4}`.
+- Parametros ajustados a la zona compacta (~26 ha): `radius=18`, `blur=14`,
+  `min_opacity=0.35`. Solo puntos dentro del poligono.
+- Capas de puntos (CircleMarker) por categoria, apagadas por defecto, popups SIN PII
+  (homicidios con popup minimo: solo fecha).
+
+### 7.3 Serie de tiempo (panel colapsable)
+
+- Panel flotante HTML inyectado con `get_root().html.add_child(...)`, esquina superior
+  izquierda, z-index 9999. Usa `<details>/<summary>` para colapsar.
+- **Ancho del panel: `max-width:480px; width:min(480px,46vw)`.**
+- Grafico con **Chart.js** (CDN jsdelivr), con degradacion a tabla HTML si no carga.
+- Serie **ANUAL** (2023, 2024, 2025, 2026) por categoria.
+- **Doble eje Y** por disparidad de magnitudes:
+  - Eje izquierdo "Cantidad de casos (hurtos / homicidios)".
+  - Eje derecho "Cantidad de comparendos".
+  - Nota aclaratoria de doble escala sobre el grafico.
+- Canvas en contenedor de altura fija (200px) con `maintainAspectRatio:false` +
+  `responsive:true` para aprovechar el ancho sin distorsion.
+- Colores de linea Okabe-Ito: hurto=OKI_AZUL, comparendo=OKI_VERDE, homicidio=OKI_BERMELL.
+- Totales anuales reales: comparendos 1847/1920/1990/1938; hurtos 257/208/164/89;
+  homicidios 16/6/11/4 (2026 parcial hasta septiembre).
+
+### 7.4 Parametros comunes de los 3 mapas (ITT, avance, seguridad)
+
+- Capas base: Google Streets (activa), Esri Satelite, Google Satelite. **Sin OpenStreetMap**
+  (no cargaba de forma fiable).
+- **Zoom:** `zoom_start=16`, `zoom_snap=0.25`, `zoom_delta=0.5` (zoom fraccional, pasos
+  finos). Tiles con `max_zoom=22`, `max_native_zoom=20` (los tiles se escalan mas alla de
+  su resolucion nativa; el zoom ya no se bloquea en nivel 18).
+- Poligono de Ciudad Paraiso: borde `#8A6D1A`, weight 5, dashArray "10 6", sin relleno.
+- Mapa de seguridad a pantalla completa (CSS: contenedor 100% de la ventana) + mascara
+  oscura (fillOpacity 0.25) fuera de la zona para enfocar.
+
+### 7.5 Tamanios de los HTML generados (data_processed_geo/, ignorada por git)
+
+| Archivo | Tamano |
+|---|---|
+| `mapa_geoanalitica_itt.html` | ~1.79 MB |
+| `mapa_avance_caracterizacion.html` | ~2.61 MB |
+| `mapa_avance_caracterizacion_ejecutivo.html` | ~2.59 MB |
+| `mapa_seguridad_calor.html` | ~11.2 MB |
