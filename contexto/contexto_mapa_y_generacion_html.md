@@ -745,8 +745,16 @@ Salida: `mapa_html/mapa_ics.html`.
   variables) e `ICS_ciudad_Paraiso.geojson`. Ambas livianas (~140 KB), se versionan en el
   repo (datos agregados por manzana, sin PII), por lo que Colab las obtiene con el clone.
 
-### 20.3 Pendiente
-- Migrar el mapa de IPM dedicado (nb 08) a la fuente oficial + escala viridis de 8
-  categorias + leyenda (hoy usa la fuente anterior y rampa RdPu).
-- Actualizar la capa de referencia IPM (`_add_ipm_ref`) en los mapas 02-07 a la fuente
-  oficial.
+### 20.3 Mapa IPM (nb 08) actualizado
+- Migrado a la fuente oficial `IPM_ciudad_Paraiso.geojson` (33 manzanas), con la **escala
+  viridis de 8 categorias** y **leyenda de paleta** flotante (abajo-derecha, `ipm-leyenda`).
+
+### 20.4 Capas de referencia IPM/ICS en los mapas de dimension (02-07)
+- Cada mapa de dimension incluye ahora DOS capas de referencia (apagadas):
+  `Ref IPM: pobreza por manzana` (viridis) y `Ref ICS: condicion social por manzana`
+  (cividis), desde la fuente oficial.
+- **Leyenda por activacion:** cada capa tiene su leyenda oculta (`ref-ley-ipm`,
+  `ref-ley-ics`) que aparece SOLO cuando el usuario enciende la capa en el control, via
+  eventos Leaflet `overlayadd`/`overlayremove`. Se ocultan al apagar la capa.
+- Funcion reutilizable `_add_ipm_ics_ref(mapa)` (reemplaza al antiguo `_add_ipm_ref`).
+- El mapa ITT general (nb 02) usa la fuente oficial para su referencia IPM.
