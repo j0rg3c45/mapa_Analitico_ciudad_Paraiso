@@ -194,20 +194,23 @@ Obrero = 13,18 · Roosevelt = 7,51.
 
 ---
 
-## 6. Pendientes de implementacion (segun esta guia)
+## 6. Estado de implementacion
 
-Al incorporar esta guia, quedan por hacer (en una proxima tarea):
+1. **Mapa IPM (nb 08) - HECHO:** usa la fuente oficial `IPM_ciudad_Paraiso.geojson` con la
+   escala oficial de 8 categorias en paleta **viridis** + leyenda de paleta en el mapa.
+2. **Mapa ICS (nb 10) - HECHO:** `data/geojson/ICS_ciudad_Paraiso.geojson` (columna `ics`),
+   escala de 8 categorias en paleta **cividis** (directo) + leyenda de paleta.
+3. **Capas de referencia en los mapas 02-07 - HECHO:** cada mapa de dimension incluye
+   `Ref IPM` (viridis) y `Ref ICS` (cividis), apagadas, desde la fuente oficial, via
+   `_add_ipm_ics_ref(mapa)`. La leyenda de cada una aparece SOLO al activar la capa
+   (`overlayadd`/`overlayremove`).
+4. **Laboratorio (nb 09) - HECHO:** usa la fuente oficial (trae ipm, ics y las 15
+   variables); panel legible con medidores IPM/ICS + privaciones por manzana al tocarla,
+   y leyenda doble (viridis/cividis).
+5. **Cruce IPM <-> ICS:** directo por `COD_MZN` (22 chars) en los GeoJSON; de hecho el
+   GeoJSON oficial de IPM ya trae la columna `ics`, por lo que no requiere cruce de
+   archivos. La transformacion 24->22 chars solo aplica al Excel.
 
-1. **Mapa IPM (nb 08):** migrar la fuente a `data/geojson/IPM_ciudad_Paraiso.geojson` y
-   aplicar la **escala oficial de 8 categorias con paleta viridis** (seccion 3), en vez de
-   la rampa RdPu actual.
-2. **Mapa ICS (nuevo):** crear el mapa del Indice de Condicion Social desde
-   `data/geojson/ICS_ciudad_Paraiso.geojson` (columna `ics`), con la **escala de 8
-   categorias en paleta cividis** (directo, mayor = mejor).
-3. **Capa de referencia en los demas mapas (02-07):** actualizar `_add_ipm_ref()` para
-   leer la nueva fuente oficial y, si procede, agregar tambien una capa de referencia ICS.
-4. **Laboratorio (nb 09):** usar las fuentes oficiales IPM/ICS y, con `ics` disponible por
-   manzana, el eje Y de la matriz puede pasar a ICS (condicion social) ademas de los
-   eventos, permitiendo el cruce IPM vs ICS directo.
-5. **Cruce IPM <-> ICS:** directo por `COD_MZN` (22 chars) en los GeoJSON; no requiere la
-   transformacion de 24->22 chars (esa solo aplica al Excel).
+### Pendiente / opcional
+- Confirmar si el mapa dedicado de IPM debe mostrar tambien ICS como capa alterna (hoy el
+  laboratorio ya ofrece ambas).

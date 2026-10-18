@@ -703,13 +703,16 @@ Notebook `notebooks/08_mapa_ipm.ipynb`. Mapa del Indice de Pobreza Multidimensio
 manzana, recortado a Ciudad Paraiso. Salida: `mapa_html/mapa_ipm.html` (~0.9 MB).
 
 ### 19.1 Datos
-- Fuente: `data/geojson/Mzn_ipm_variables.geojson` (15.658 manzanas de Cali, ~31 MB). Se
-  filtra por interseccion/within con el poligono de la zona: **33 manzanas**.
+- Fuente oficial (vigente): `data/geojson/IPM_ciudad_Paraiso.geojson` (33 manzanas de la
+  zona; trae `ipm`, `ics` y las 15 variables). Escala de 8 categorias, paleta viridis +
+  leyenda de paleta en el mapa.
+  > Historico: antes se usaba `Mzn_ipm_variables.geojson` (15.658 manzanas de Cali, ~31 MB)
+  > recortado a la zona; ya reemplazado por la fuente oficial.
 - Campo `ipm` (indice 0-100; en zona min 0, max 83.3, promedio 26.5) + 15 variables de
   privacion (porcentajes): ANALF_, BAJO_, INFANCIA_, INASIS_, REZAGO_, TRAB_INFAN,
   DEPEN_, INFOR_, SALUD_, ASEGU_, HACI_, PARED_, EXCRE_, PISOS_, AGUA_.
-- La fuente completa (~31 MB) NO se versiona (gitignore). La version RECORTADA a la zona
-  (33 manzanas, sin PII) viaja en `data_publico/data_itt_publico.zip` dentro de `geojson/`,
+- La version recortada a la zona (33 manzanas, sin PII) tambien viaja en
+  `data_publico/data_itt_publico.zip` dentro de `geojson/`,
   para que Colab la lea en `data/geojson/`.
 
 ### 19.2 Capas y panel

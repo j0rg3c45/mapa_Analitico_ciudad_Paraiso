@@ -165,12 +165,21 @@ Opcional segun dimension: `ITT: homicidios <=300m estacion`
 (`12_estacion_fray_damian_homicidios_300m.geojson`, puntos popup SIN PII) cuando el
 tema lo amerite (seguridad).
 
-Capa de referencia adicional (TAMBIEN en todos los mapas, apagada):
-`Ref IPM: pobreza por manzana` -> coropleta del IPM recortado a la zona
-(`data/geojson/Mzn_ipm_variables.geojson`, 33 manzanas), rampa RdPu, `fillOpacity 0.55`.
-Sirve como contexto socioeconomico comun. Codigo: funcion `_add_ipm_ref()` que resuelve
-la ruta (local y Colab), recorta a la zona y arma la capa apagada; se agrega al orden
-justo despues de `_fg_manzanas`. El mapa dedicado de IPM es `notebooks/08_mapa_ipm.ipynb`.
+Capas de referencia socioeconomica (TAMBIEN en todos los mapas, apagadas):
+- `Ref IPM: pobreza por manzana` -> coropleta IPM, **paleta viridis**, escala oficial de
+  8 categorias (ver `contexto_ipm_ics.md`).
+- `Ref ICS: condicion social por manzana` -> coropleta ICS, **paleta cividis**, misma
+  escala de 8 categorias.
+- Fuente oficial unica: `data/geojson/IPM_ciudad_Paraiso.geojson` (33 manzanas; trae
+  `ipm`, `ics` y las 15 variables). Funcion reutilizable `_add_ipm_ics_ref(mapa)` (resuelve
+  ruta local/Colab, recorta a la zona, devuelve los 2 FeatureGroup). Se agregan al orden
+  justo despues de `_fg_manzanas`.
+- **Leyenda por activacion:** cada capa tiene su leyenda de paleta OCULTA que aparece solo
+  cuando el usuario enciende la capa (eventos Leaflet `overlayadd`/`overlayremove`) y se
+  oculta al apagarla (ids `ref-ley-ipm`, `ref-ley-ics`). Posicion: lado IZQUIERDO abajo
+  (IPM `bottom-left:24px`, ICS `bottom-left:244px`), para no chocar con el slider de calor
+  (abajo-derecha).
+- Mapas dedicados: IPM `notebooks/08_mapa_ipm.ipynb`, ICS `notebooks/10_mapa_ics.ipynb`.
 
 El codigo de estas capas (funciones `_add_geojson_itt`, `_add_manzanas_itt`,
 `_add_demoliciones` y los popups) se reutiliza TAL CUAL del notebook 02 (celda 39);
