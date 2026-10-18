@@ -49,6 +49,9 @@ polígonos para ver su detalle.
 - **Vivienda:** déficit habitacional por barrio (fuente SISBÉN), con el ranking de los
   barrios de la zona.
 
+- **IPM — Pobreza multidimensional:** índice de pobreza multidimensional por manzana y
+  sus principales variables de privación (educación, empleo, salud, vivienda y servicios).
+
 **Una nota importante:** estos mapas contienen información territorial sensible, por lo
 que les pedimos el favor de **usarlos solo para fines internos** y no publicarlos en
 sitios de acceso abierto.

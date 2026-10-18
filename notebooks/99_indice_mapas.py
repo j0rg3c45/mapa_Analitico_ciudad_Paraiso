@@ -45,6 +45,8 @@ CATALOGO = [
      "Negocios por estado (puntos y densidad) y sedes educativas.", OKI_AZUL),
     ("mapa_vivienda.html", "Vivienda", None,
      "Deficit habitacional por barrio (SISBEN), coropleta.", OKI_BERMELL),
+    ("mapa_ipm.html", "IPM - Pobreza multidimensional", None,
+     "Indice de Pobreza Multidimensional por manzana y variables de privacion.", OKI_MORADO),
 ]
 
 # Dimensiones sin datos todavia (se muestran deshabilitadas).

@@ -37,6 +37,7 @@ INCLUIR = [
     "mapa_entorno_urbano.html",
     "mapa_desarrollo_economico.html",
     "mapa_vivienda.html",
+    "mapa_ipm.html",
 ]
 
 # README que viaja dentro del ZIP.
@@ -68,6 +69,7 @@ Que contiene
 - mapa_entorno_urbano.html ............ Entorno urbano (NDVI, arbolado, deficit).
 - mapa_desarrollo_economico.html ...... Desarrollo economico (negocios, educacion).
 - mapa_vivienda.html .................. Vivienda (deficit habitacional por barrio).
+- mapa_ipm.html ....................... IPM (pobreza multidimensional por manzana).
 
 Como usar cada mapa
 -------------------

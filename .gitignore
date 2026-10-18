@@ -39,6 +39,10 @@ mapa_html/*.html
 # poligono) NO es dato personal y SI se versiona. Si algun
 # GeoJSON contiene atributos sensibles, excluirlo aqui.
 
+# IPM: fuente completa de Cali (~31 MB, 15.658 manzanas). NO se versiona por tamanio.
+# La version RECORTADA a la zona viaja en data_publico/data_itt_publico.zip (geojson/).
+data/geojson/Mzn_ipm_variables.geojson
+
 # ------------------------------------------------------------
 # Entorno Python gestionado con uv (entorno unico)
 # ------------------------------------------------------------

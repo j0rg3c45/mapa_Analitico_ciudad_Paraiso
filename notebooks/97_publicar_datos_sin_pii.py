@@ -71,6 +71,36 @@ WHITELIST = {
 }
 
 CRS_WEB = 4326
+
+# IPM: la fuente (data/geojson/Mzn_ipm_variables.geojson) son 15.658 manzanas de Cali
+# (~31 MB), demasiado para el repo. Se RECORTA a la zona (unas 33 manzanas) y la version
+# liviana se incluye en el ZIP publico, dentro de geojson/. No tiene PII (datos censales
+# agregados por manzana).
+def _recorte_ipm(tmp_dir):
+    def _p(nombre, carpeta):
+        for b in [os.path.join("..", "data", carpeta, nombre),
+                  os.path.join("data", carpeta, nombre),
+                  os.path.join("/content", "data", carpeta, nombre)]:
+            if os.path.isfile(b):
+                return os.path.abspath(b)
+        return None
+    rp_ipm = _p("Mzn_ipm_variables.geojson", "geojson")
+    rp_pol = _p("poligono_ciudad_Paraiso.geojson", "geojson")
+    if rp_ipm is None or rp_pol is None:
+        print("Aviso: no se pudo recortar IPM (falta fuente o poligono); se omite.")
+        return None
+    g = gpd.read_file(rp_ipm)
+    g = g.set_crs(epsg=CRS_WEB) if g.crs is None else g.to_crs(CRS_WEB)
+    pol = gpd.read_file(rp_pol).to_crs(CRS_WEB)
+    zona = pol.geometry.union_all()
+    z = g[g.geometry.within(zona) | g.geometry.intersects(zona)].copy()
+    sub = os.path.join(tmp_dir, "geojson")
+    os.makedirs(sub, exist_ok=True)
+    dest = os.path.join(sub, "Mzn_ipm_variables.geojson")
+    z.to_file(dest, driver="GeoJSON")
+    print("Recorte IPM: %d de %d manzanas (en zona) -> geojson/Mzn_ipm_variables.geojson" % (len(z), len(g)))
+    return dest
+
 resumen = []
 for arch, cols_ok in WHITELIST.items():
     rp = os.path.join(DIR_ITT, arch)
@@ -92,11 +122,17 @@ for arch, cols_ok in WHITELIST.items():
     resumen.append((arch, len(out), len(keep), len(descartadas)))
     print("Saneada %-45s feats=%-5d conserva=%-2d descarta=%d" % (arch, len(out), len(keep), len(descartadas)))
 
+# Recorte del IPM a la zona (version liviana para el repo/Colab).
+ipm_recorte = _recorte_ipm(TMP)
+
 # Empaquetar en un unico ZIP.
 zip_path = os.path.join(OUT_DIR, "data_itt_publico.zip")
 with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as z:
     for arch, _, _, _ in resumen:
         z.write(os.path.join(TMP, arch), "1_data_itt/" + arch)
+    # IPM recortado dentro de geojson/.
+    if ipm_recorte and os.path.isfile(ipm_recorte):
+        z.write(ipm_recorte, "geojson/Mzn_ipm_variables.geojson")
     # README dentro del ZIP.
     z.writestr("1_data_itt/LEEME_DATOS.txt",
                "Datos PUBLICOS del ITT Ciudad Paraiso (version SIN datos personales).\n"
@@ -111,6 +147,8 @@ for arch, _, _, _ in resumen:
         os.remove(os.path.join(TMP, arch))
     except OSError:
         pass
+import shutil as _sh
+_sh.rmtree(os.path.join(TMP, "geojson"), ignore_errors=True)
 try:
     os.rmdir(TMP)
 except OSError:

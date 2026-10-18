@@ -694,3 +694,32 @@ ignorada por git).
 - `97_publicar_datos_sin_pii.py` -> genera `data_publico/data_itt_publico.zip` (sin PII).
 - `98_empaquetar_mapas.py` -> genera el ZIP de mapas para correo (en `compartir_itt_mapas/`).
 - `99_indice_mapas.py` -> genera `mapa_html/index.html` (portada que enlaza los mapas).
+
+---
+
+## 19. Mapa de IPM - Pobreza Multidimensional (notebook 08)
+
+Notebook `notebooks/08_mapa_ipm.ipynb`. Mapa del Indice de Pobreza Multidimensional por
+manzana, recortado a Ciudad Paraiso. Salida: `mapa_html/mapa_ipm.html` (~0.9 MB).
+
+### 19.1 Datos
+- Fuente: `data/geojson/Mzn_ipm_variables.geojson` (15.658 manzanas de Cali, ~31 MB). Se
+  filtra por interseccion/within con el poligono de la zona: **33 manzanas**.
+- Campo `ipm` (indice 0-100; en zona min 0, max 83.3, promedio 26.5) + 15 variables de
+  privacion (porcentajes): ANALF_, BAJO_, INFANCIA_, INASIS_, REZAGO_, TRAB_INFAN,
+  DEPEN_, INFOR_, SALUD_, ASEGU_, HACI_, PARED_, EXCRE_, PISOS_, AGUA_.
+- La fuente completa (~31 MB) NO se versiona (gitignore). La version RECORTADA a la zona
+  (33 manzanas, sin PII) viaja en `data_publico/data_itt_publico.zip` dentro de `geojson/`,
+  para que Colab la lea en `data/geojson/`.
+
+### 19.2 Capas y panel
+- **IPM: indice por manzana** (coropleta, rampa RdPu por valor de IPM, mas oscuro = mas
+  pobreza). ACTIVA al inicio. Popup con el IPM y las 3 privaciones principales de la
+  manzana.
+- Panel #ipm-panel: resumen (manzanas, IPM promedio y maximo) + **grafica de barras
+  horizontal** de las 15 variables de privacion (promedio de la zona), ordenadas de mayor
+  a menor. No hay serie de tiempo (el IPM es un corte censal unico), por eso se grafican
+  las privaciones.
+- Capas transversales ITT (limite, manzanas, Fray Damian, demoliciones), capas base
+  Google/Esri, mascara, boton "Exportar lamina (deck)". No lleva slider de calor (no hay
+  heatmap). Celda 0 "Setup Colab".
