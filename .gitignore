@@ -28,6 +28,13 @@ Mapa_Visitas_Ciudad_Paraiso.html
 # ejecutar el notebook). No se versionan.
 data_processed_geo/
 
+# Mapas HTML generados por los notebooks (mapa_html/): regenerables y algunos
+# pesados (entorno urbano embebe NDVI). NO se versionan, salvo el mapa de visitas
+# que ya estaba en el repo. El index.html tampoco se versiona (se regenera con
+# notebooks/99_indice_mapas.py).
+mapa_html/*.html
+!mapa_html/Mapa_Visitas_Ciudad_Paraiso_v2.html
+
 # Nota: la geometria del territorio (GeoJSON de manzanas y
 # poligono) NO es dato personal y SI se versiona. Si algun
 # GeoJSON contiene atributos sensibles, excluirlo aqui.
@@ -73,3 +80,18 @@ data/1_data_itt/
 # Se conserva la estructura de carpeta con .gitkeep.
 output/deck_output/*
 !output/deck_output/.gitkeep
+
+# ------------------------------------------------------------
+# Paquetes para compartir (output/): ZIP de mapas HTML regenerables.
+# NO se versionan (se reconstruyen con notebooks/98_empaquetar_mapas.py).
+# ------------------------------------------------------------
+output/*.zip
+
+# ------------------------------------------------------------
+# Datos PUBLICOS sin PII (data_publico/): SI se versiona SOLO el ZIP
+# saneado (generado por notebooks/97_publicar_datos_sin_pii.py). Es la
+# fuente que Colab descomprime a data/1_data_itt/. No contiene PII.
+# Se ignoran temporales de ese proceso.
+# ------------------------------------------------------------
+data_publico/_tmp_itt/
+!data_publico/data_itt_publico.zip

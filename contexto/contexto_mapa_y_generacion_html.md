@@ -658,3 +658,39 @@ ignorada por git).
 
 > Nota: la capa de educacion (14) tambien podria vivir en un mapa de equipamientos;
 > por ahora se incluye como contexto en el mapa economico.
+
+---
+
+## 18. Carpetas de salida, Colab y distribucion
+
+### 18.1 Donde se guardan las salidas
+- **Mapas HTML -> `mapa_html/`** (variable `MAPAS_DIR` en los notebooks 02-07). Antes se
+  guardaban en `data_processed_geo/`; se movieron a `mapa_html/`.
+- **Artefactos de datos** (`.geojson`, `.parquet`, `ndvi_*.png`) siguen en
+  `data_processed_geo/` (variable `OUT_DIR`).
+- `mapa_html/*.html` NO se versiona (regenerable y pesado), salvo
+  `Mapa_Visitas_Ciudad_Paraiso_v2.html` que ya estaba en el repo. El `index.html`
+  (portada) tampoco se versiona; se regenera con `notebooks/99_indice_mapas.py`.
+
+### 18.2 Ejecucion en Google Colab (sin Drive)
+- Cada notebook de dimension (02-07) tiene una **celda 0 "Setup Colab"** condicional:
+  detecta Colab (`import google.colab`), instala dependencias (`geopandas folium
+  mapclassify pyarrow openpyxl`), clona el repo y descomprime el ZIP de datos publicos
+  a `data/1_data_itt/`, y hace `chdir` a `notebooks/`. En el entorno uv local la celda
+  NO hace nada (no rompe el entorno unico).
+- **Datos para Colab:** `data_publico/data_itt_publico.zip` (versionado en el repo).
+  Generado por `notebooks/97_publicar_datos_sin_pii.py` con WHITELIST de columnas por
+  capa: SOLO campos sin PII que usan los mapas; homicidios quedan con geometria+fecha.
+  Verificado: 0 columnas con PII. Es la fuente que Colab descomprime.
+- `data/1_data_itt/` (crudo, CON PII) sigue ignorado por git; nunca se sube.
+
+### 18.3 Compartir por correo
+- `notebooks/98_empaquetar_mapas.py` arma `output/Mapas_ITT_Ciudad_Paraiso_<fecha>.zip`
+  con los HTML del ITT + `LEEME.txt` (como abrir, requisitos: internet + Chrome/Edge).
+  El ZIP (~4 MB) cabe en un correo estandar (limite ~25 MB). `output/*.zip` no se
+  versiona.
+
+### 18.4 Scripts auxiliares (notebooks/)
+- `97_publicar_datos_sin_pii.py` -> genera `data_publico/data_itt_publico.zip` (sin PII).
+- `98_empaquetar_mapas.py` -> genera el ZIP de mapas para correo (en `output/`).
+- `99_indice_mapas.py` -> genera `mapa_html/index.html` (portada que enlaza los mapas).

@@ -11,15 +11,18 @@ Ejecutar en el entorno uv unico del proyecto:
 import os
 from datetime import date
 
-# Carpeta de salida (donde viven los HTML). Resolucion local + Colab.
+# Carpeta donde viven los MAPAS HTML (mapa_html/). Resolucion local + Colab.
+# El index.html se escribe en la misma carpeta para que los enlaces relativos
+# funcionen al abrir el archivo directamente.
 OUT_DIR = None
-for _base in [os.path.join("..", "data_processed_geo"), "data_processed_geo",
-              "/content/data_processed_geo"]:
+for _base in [os.path.join("..", "mapa_html"), "mapa_html", "/content/mapa_html"]:
     if os.path.isdir(_base):
         OUT_DIR = os.path.abspath(_base)
         break
 if OUT_DIR is None:
-    raise FileNotFoundError("No se encontro la carpeta data_processed_geo/.")
+    # Si aun no existe, usar la ruta local por defecto (se creara al generar mapas).
+    OUT_DIR = os.path.abspath(os.path.join("..", "mapa_html"))
+    os.makedirs(OUT_DIR, exist_ok=True)
 
 # Paleta Okabe-Ito.
 OKI_AZUL, OKI_NARANJA, OKI_VERDE = "#0072B2", "#E69F00", "#009E73"

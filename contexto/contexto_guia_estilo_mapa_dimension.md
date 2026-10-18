@@ -1,6 +1,6 @@
 # Guia de estilo y capas por dimension (mapa de referencia)
 
-Mapa patron: `data_processed_geo/mapa_seguridad_calor.html` (notebook
+Mapa patron: `mapa_html/mapa_seguridad_calor.html` (notebook
 `notebooks/02_mapa_geoanalitica_itt.ipynb`, seccion 12). Este documento es la
 **plantilla oficial**: cada nueva dimension (movilidad, desarrollo social, entorno
 urbano, desarrollo economico, etc.) debe replicar esta configuracion de capas,
@@ -237,7 +237,8 @@ copiarlo en cada notebook de dimension y agregarlas en el orden de la seccion 7.
 8. Panel `#<dim>-panel` con resumen + serie anual (Chart.js + fallback).
 9. Slider `#heat-intensity-ctrl`.
 10. `agregar_export(...)` (ampliar selector de panel) y `m.save(...)` a
-    `data_processed_geo/mapa_<dimension>.html`.
+    `mapa_html/mapa_<dimension>.html` (variable `MAPAS_DIR`). Los artefactos de datos
+    (.geojson/.parquet/.png) van a `data_processed_geo/` (variable `OUT_DIR`).
 11. Verificar: ejecutar el notebook con nbconvert (0 celdas con error) y confirmar en
     el HTML que existen las capas, el panel, el slider y el boton de export.
 12. Limpiar outputs del notebook (json utf-8 sin BOM, `execution_count=null`) y
