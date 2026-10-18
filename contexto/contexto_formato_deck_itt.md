@@ -80,14 +80,17 @@ export) produce una lamina con la MISMA estructura del deck.
   panel + encabezado + leyenda, sobre fondo claro (sin mapa base por CORS).
 - Pendiente a definir con el usuario (ver seccion 5).
 
-## 5. Pendiente de confirmar / proponer
+## 5. Decisiones tomadas (confirmadas por el usuario)
 
-Para que la lamina salga "tal como el deck" conviene estandarizar el panel izquierdo de
-cada mapa en modo lamina: cifra grande + periodo + delta + mini-serie, y el mapa a la
-derecha. Decidir:
-1. Si el export debe guardar directamente en `output/deck_output/` (hoy el navegador
-   descarga a la carpeta de descargas; para forzar `output/deck_output/` habria que generar
-   las laminas desde Python/headless, no solo con el boton del navegador).
-2. Si se quiere una lamina por dimension (varias) o solo las que el usuario capture.
-3. Si el ITT por manzana (hoy uniforme 58.5 / scores vacios) debe calcularse para que la
-   coropleta por manzana del deck tenga color real.
+1. **Export con dialogo "Guardar como":** al dar export, el navegador debe preguntar
+   DONDE guardar el archivo (no descarga automatica a Descargas). Se implementa con la
+   File System Access API (`showSaveFilePicker`) en Chrome/Edge, con nombre sugerido
+   `deck_<dimension>_<AAAA-MM-DD>.jpg|pdf`; el usuario elige la carpeta (p. ej.
+   `output/deck_output/`). Fallback automatico a descarga normal donde la API no exista
+   (Firefox/Safari).
+2. **Una lamina por dimension.** Cada mapa (seguridad, entorno urbano, avance, ITT)
+   produce su propia lamina.
+3. **ITT por manzana: NO por ahora (no viable).** La coropleta de manzanas queda sin color
+   por dimension; el `itt` sigue uniforme (58.5) y los scores por dimension vacios. No se
+   calcula el ITT por manzana en este momento. Las laminas usan las capas y cifras ya
+   disponibles.
