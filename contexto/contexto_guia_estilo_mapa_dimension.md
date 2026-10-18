@@ -148,8 +148,31 @@ ultimo):
 Regla general: **limite > manzanas > CAI > puntos/eventos > calor > fondo**. Las capas
 base (TileLayer) y la mascara van antes y no son overlays conmutables.
 
-Las capas transversales del dataset ITT (00, 01, 10, 11, 12) se agregan apagadas en
-TODAS las dimensiones para dar contexto (limite, manzanas, estacion, demoliciones).
+### 7.1 Capas transversales del ITT (OBLIGATORIAS en TODAS las dimensiones)
+
+Independiente de la dimension, TODO mapa debe incluir estas 4 capas de contexto del
+dataset `data/1_data_itt/`, con el MISMO nombre, estilo y estado que en el mapa de
+seguridad (`mapa_seguridad_calor.html`). Son las "capas base del proyecto":
+
+| # | Capa | Fuente | Estilo | show inicial |
+|---|---|---|---|---|
+| 1 | `Limite Ciudad Paraiso` | `00_limite_ciudad_paraiso.geojson` | borde dorado `#8A6D1A`, weight 5, dashArray "10 6", sin relleno | **True** |
+| 2 | `ITT: manzanas (consolidado)` | `01_manzanas_itt_consolidado.geojson` | SIN relleno (`fill:False`), contorno gris `#333333` weight 1.0; tooltip/popup con ID, barrio, manzana y area formateada | False |
+| 3 | `ITT: estacion Fray Damian` | `11_estacion_fray_damian_manzana.geojson` | sin relleno, borde azul `#0072B2` weight 2.75 | False |
+| 4 | `ITT: demoliciones Cristo Rey` | `10_demoliciones_cristo_rey_predios.geojson` | poligonos clasificados por `demolicion` (Demolido `#D55E00`, Programado `#E69F00`, En proceso `#F0E442`, Sin programar `#009E73`), fillOpacity 0.65; va al FINAL del orden (fondo) | False |
+
+Opcional segun dimension: `ITT: homicidios <=300m estacion`
+(`12_estacion_fray_damian_homicidios_300m.geojson`, puntos popup SIN PII) cuando el
+tema lo amerite (seguridad).
+
+El codigo de estas capas (funciones `_add_geojson_itt`, `_add_manzanas_itt`,
+`_add_demoliciones` y los popups) se reutiliza TAL CUAL del notebook 02 (celda 39);
+copiarlo en cada notebook de dimension y agregarlas en el orden de la seccion 7.
+
+> **Estado al corte (pendiente):** `mapa_movilidad.html` (nb 04) y
+> `mapa_desarrollo_social.html` (nb 05) hoy SOLO incluyen `Limite Ciudad Paraiso`.
+> Falta agregarles las capas 2, 3 y 4 (manzanas, estacion Fray Damian, demoliciones)
+> para igualar al mapa de seguridad. Pendiente de implementar y regenerar los HTML.
 
 ---
 
@@ -207,7 +230,9 @@ TODAS las dimensiones para dar contexto (limite, manzanas, estacion, demolicione
 4. Mapa base: 3 TileLayer (seccion 2) + mascara + limite dorado activo.
 5. Capas tematicas: puntos (filtrados >=2025-09-01) + calor (todos) por categoria, o
    coropleta por manzana si el dato es agregado/sensible.
-6. Capas ITT transversales (00,01,10,11,12) apagadas.
+6. Capas ITT transversales OBLIGATORIAS (seccion 7.1): Limite (activo), manzanas
+   consolidado, estacion Fray Damian y demoliciones Cristo Rey, apagadas salvo el
+   limite. Reutilizar el codigo del notebook 02 (celda 39) tal cual.
 7. Orden de overlays (seccion 7) y `LayerControl(collapsed=False, position="topright")`.
 8. Panel `#<dim>-panel` con resumen + serie anual (Chart.js + fallback).
 9. Slider `#heat-intensity-ctrl`.
