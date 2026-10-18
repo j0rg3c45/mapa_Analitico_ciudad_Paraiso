@@ -182,3 +182,28 @@ Notas:
   `data/1_data_itt/` como fuente oficial (seguridad/convivencia desde 02-05/09, en vez de
   `seguridad_unificado.geojson`). Confirmado: `1_data_itt` es la fuente oficial.
 - ITT por manzana: NO se calcula por ahora (decision vigente).
+
+## 9. Correccion de la lamina (post-validacion del usuario)
+
+Tras generar el primer PDF (`deck_seguridad_...`), el usuario detecto 2 problemas, ambos
+corregidos:
+1. **Grafico de tendencia no aparecia** (canvas de Chart.js se clonaba vacio) -> se captura
+   el canvas real con `toDataURL` y se inserta como imagen. HECHO y validado por el usuario.
+2. **Capas desfasadas y mapa no centrado al imprimir** -> html2canvas renderiza mal las
+   capas de Leaflet en zoom fraccional / panes sin asentar. Corregido: `fitBounds` con
+   zoom ENTERO (maxZoom 17, animate false), esperar evento `moveend` (fallback 1200ms),
+   `invalidateSize()` + margen 350ms antes de capturar. HECHO (pendiente de validacion
+   visual final del usuario abriendo el HTML y generando un nuevo PDF).
+
+## 10. Que falta (estado al corte)
+
+- **Paso B (pendiente):** crear el mapa de MOVILIDAD (`06_movilidad_siniestros` 97 puntos +
+  `07_movilidad_red_peatonal_osm` 400 lineas) como notebook propio `04_mapa_movilidad.ipynb`,
+  replicando estandares (capas base, zoom, mascara, poligono, panel colapsable con serie,
+  boton lamina deck, slider de calor, colores Okabe-Ito).
+- **Paso C (pendiente):** migrar seguridad/convivencia a los datos de `data/1_data_itt/`
+  (02-05, 09) como fuente oficial, en vez de `seguridad_unificado.geojson`.
+- **ITT por manzana:** no se calcula por ahora (decision del usuario).
+- **Deck PMU completo:** 17 laminas (ver `contexto_deck/contexto_presentacion_itt_ciudad_paraiso.md`).
+  Hoy solo se exportan laminas por dimension desde cada mapa; el deck completo multi-lamina
+  no esta automatizado.
