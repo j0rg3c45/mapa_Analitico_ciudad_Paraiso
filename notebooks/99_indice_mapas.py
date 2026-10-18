@@ -38,17 +38,14 @@ CATALOGO = [
      "VIF (densidad por manzana), rinas y SPA (puntos y calor).", OKI_MORADO),
     ("mapa_entorno_urbano.html", "Entorno urbano", "17%",
      "NDVI anual, censo arboreo y deficit habitacional.", OKI_VERDE),
-    ("mapa_avance_caracterizacion.html", "Avance de caracterizacion", None,
-     "Avance de la encuesta de caracterizacion por manzana y eje.", OKI_GRIS),
-    ("mapa_avance_caracterizacion_ejecutivo.html", "Avance - vista ejecutiva", None,
-     "Resumen ejecutivo del avance de caracterizacion.", OKI_GRIS),
+    ("mapa_desarrollo_economico.html", "Desarrollo economico", "15%",
+     "Negocios por estado (puntos y densidad) y sedes educativas.", OKI_AZUL),
+    ("mapa_vivienda.html", "Vivienda", None,
+     "Deficit habitacional por barrio (SISBEN), coropleta.", OKI_BERMELL),
 ]
 
-# Dimension sin datos todavia (se muestra deshabilitada).
-PENDIENTES = [
-    ("Desarrollo economico", "15%",
-     "Establecimientos activos, ingresos y empleo. Pendiente de datos (Camara de Comercio)."),
-]
+# Dimensiones sin datos todavia (se muestran deshabilitadas).
+PENDIENTES = []
 
 def _tarjeta(archivo, titulo, peso, desc, color):
     disponible = os.path.isfile(os.path.join(OUT_DIR, archivo))
@@ -127,24 +124,28 @@ HTML = """<!DOCTYPE html>
   <div class="grid">
 __CARDS__
   </div>
-  <h2 class="sec">Dimensiones pendientes</h2>
-  <div class="grid">
-__PEND__
-  </div>
+__PEND_SECTION__
 </div>
 <footer>
   Los mapas se abren en el navegador. Se regeneran ejecutando sus notebooks
-  (notebooks/02-05) en el entorno uv del proyecto. Esta portada no se versiona
+  (notebooks/02-07) en el entorno uv del proyecto. Esta portada no se versiona
   (carpeta data_processed_geo/ ignorada por git).
 </footer>
 </body>
 </html>
 """
 
+# Seccion de pendientes solo si hay items.
+if cards_pend.strip():
+    pend_section = ('  <h2 class="sec">Dimensiones pendientes</h2>\n'
+                    '  <div class="grid">\n' + cards_pend + '\n  </div>')
+else:
+    pend_section = ""
+
 HTML = (HTML.replace("__GRIS__", OKI_GRIS).replace("__BG__", BG)
             .replace("__DORADO__", DORADO).replace("__AZUL__", OKI_AZUL)
             .replace("__N__", str(n_disp)).replace("__FECHA__", date.today().isoformat())
-            .replace("__CARDS__", cards).replace("__PEND__", cards_pend))
+            .replace("__CARDS__", cards).replace("__PEND_SECTION__", pend_section))
 
 out = os.path.join(OUT_DIR, "index.html")
 with open(out, "w", encoding="utf-8") as fh:

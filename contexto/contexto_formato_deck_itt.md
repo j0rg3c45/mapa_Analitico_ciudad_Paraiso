@@ -209,8 +209,9 @@ corregidos:
 - **Paso C (HECHO para seguridad):** seguridad migrada a `data/1_data_itt/` (02-05) como
   fuente oficial, con 4 categorias (hurto, rina, spa, homicidio), cada una con puntos
   (filtrados >=2025-09-01) y heatmap propio (todos los anios) + serie anual.
-- **Dimension pendiente:** DESARROLLO ECONOMICO (15%) no tiene datos en `data/1_data_itt/`
-  ni carpeta propia; su mapa queda bloqueado hasta recibir la fuente (Camara de Comercio).
+- **Dimensiones completadas:** DESARROLLO ECONOMICO (15%, nb 06, capas 13 negocios + 14
+  educacion) y VIVIENDA (deficit habitacional por barrio SISBEN, nb 07) ya tienen mapa.
+  Con esto estan cubiertas las 5 dimensiones del ITT.
 - **ITT por manzana:** no se calcula por ahora (decision del usuario).
 - **Deck PMU completo:** 17 laminas (ver `contexto_deck/contexto_presentacion_itt_ciudad_paraiso.md`).
   Hoy solo se exportan laminas por dimension desde cada mapa; el deck completo multi-lamina

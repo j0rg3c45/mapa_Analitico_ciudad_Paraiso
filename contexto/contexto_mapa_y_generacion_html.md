@@ -607,3 +607,54 @@ variables de la dimension (peso 19%: VIF + rinas + SPA). Salida:
 > Nota: rinas y SPA tambien aparecen en el mapa de seguridad (notebook 02) como foto de
 > convivencia; aqui se agrupan con VIF segun la composicion metodologica del ITT
 > (Desarrollo Social = VIF + rinas + SPA).
+
+---
+
+## 16. Dimension Desarrollo Economico (notebook 06)
+
+Notebook `notebooks/06_mapa_desarrollo_economico.ipynb`. Dimension Desarrollo Economico
+del ITT (peso 15%). Salida: `data_processed_geo/mapa_desarrollo_economico.html`
+(~1.15 MB, ignorada por git).
+
+### 16.1 Datos
+- `13_desarrollo_economico_negocios.geojson` (328 puntos): registros de Camara de
+  Comercio. Estado: Registro Activo 314, Cancelado 14. Campos: razon social, estado,
+  `fechamatricula`/`fecharenovacion`/`fechacancelacion`, `ingresosordinarios`,
+  `activototal`, `utilidadoperacional`, `codigo_ciiu`.
+- `14_educacion_sedes.geojson` (6 sedes): equipamiento educativo de contexto.
+
+### 16.2 Capas
+- **Puntos de negocios por estado** (CircleMarker): Registro Activo (verde, ACTIVA al
+  inicio), Cancelado (bermellon). Popup comercial sin PII personal (actividad, ultima
+  renovacion, activo total).
+- **Calor: densidad economica** (HeatMap, rampa Blues): todos los negocios en zona.
+- **Educacion: sedes** (CircleMarker morado, radio 6): capa de equipamiento, apagada.
+- Panel #eco-panel: serie anual de renovaciones de matricula (proxy de actividad), eje
+  unico. Slider de calor, capas transversales ITT, boton "Exportar lamina (deck)".
+
+## 17. Dimension Vivienda (notebook 07)
+
+Notebook `notebooks/07_mapa_vivienda.ipynb`. Dimension Vivienda del ITT (parte del
+15% / subcomponente). Salida: `data_processed_geo/mapa_vivienda.html` (~0.7 MB,
+ignorada por git).
+
+### 17.1 Datos
+- `data/5_Dimension_Entorno_Urbano/sec_vivienda/DEF_HAB_SISBEN.shp` (386 barrios de
+  Cali): deficit habitacional por barrio (SISBEN). Se recorta a los 6 barrios que
+  intersectan Ciudad Paraiso: Sucre, El Calvario, Santa Rosa, San Pascual, San Juan
+  Bosco, Guayaquil (% deficit 41-50%).
+- Campos: `T_HOG` (total hogares), `HOG_DEF_HA` (hogares con deficit), `F_HOG_DE_1`
+  (% deficit).
+- El Excel de subsidios con PII (`*SUBSIDIOS*.xlsx`) se IGNORA (regla de privacidad).
+
+### 17.2 Capas
+- **Vivienda: deficit habitacional por barrio** (coropleta, rampa OrRd por % de
+  deficit, mas oscuro = mas deficit). ACTIVA al inicio. Agregado por barrio, nunca
+  viviendas individuales. Popup con total hogares, hogares con deficit y % .
+- Panel #viv-panel: resumen (total hogares/deficit) + ranking de barrios por % de
+  deficit (tabla, SIN serie de tiempo porque el dato es un stock 2024). Capas
+  transversales ITT, boton "Exportar lamina (deck)". No lleva slider de calor (no hay
+  heatmap).
+
+> Nota: la capa de educacion (14) tambien podria vivir en un mapa de equipamientos;
+> por ahora se incluye como contexto en el mapa economico.
