@@ -452,3 +452,33 @@ apagadas al inicio, resolviendo ruta local y Colab.
   coropleta es neutra hasta calcular el ITT real por manzana (pendiente de fondo).
 - Metodologia del ITT documentada aparte en `contexto/contexto_itt_ciudad_paraiso.md`
   (zona, pesos por dimension, verificacion espacial point-in-polygon).
+
+---
+
+## 12. Orden de capas en el LayerControl (ambos mapas)
+
+Las capas del control se ordenan segun el orden en que se hace `.add_to(mapa)` (Folium las
+lista en ese mismo orden). Para controlarlo, las funciones que crean capas (`_add_geojson_itt`,
+`_add_manzanas_itt`, `_add_demoliciones`) RETORNAN su FeatureGroup y al final se agregan en
+una lista ordenada. Solo el limite queda activo (`show=True`); el resto `show=False`.
+
+Orden definido (de primera a ultima en el panel):
+
+**Mapa seguridad (`m_seg`):**
+1. Limite Ciudad Paraiso (activo)
+2. ITT: manzanas (consolidado)
+3. ITT: estacion Fray Damian (CAI de policia)
+4-7. Puntos: hurto, comparendo, homicidio, homicidios <=300m estacion
+8-10. Calor: hurto, comparendo, homicidio
+11. ITT: demoliciones Cristo Rey (poligono de fondo)
+
+**Mapa entorno urbano (`m_eu`):**
+1. Limite Ciudad Paraiso (activo)
+2. ITT: manzanas (consolidado)
+3. ITT: estacion Fray Damian
+4-6. Arboles (censo), Arboles (densidad/calor), homicidios <=300m estacion
+7-10. NDVI 2023, 2024, 2025, 2026
+11-12. Deficit habitacional, ITT: demoliciones Cristo Rey
+
+Regla general del orden: limite > manzanas > CAI > puntos/eventos > NDVI > deficit/fondo.
+Las capas base (TileLayer) y la mascara oscura van antes y no son overlays conmutables.
