@@ -58,3 +58,8 @@ desktop.ini
 # ------------------------------------------------------------
 *.log
 *.tmp
+
+# PII en dimension Entorno Urbano: base de subsidios con nombre, cedula y direccion
+# de beneficiarios. NO versionar.
+data/5_Dimension_Entorno_Urbano/sec_vivienda/*SUBSIDIOS*.xlsx
+**/*SUBSIDIOS*.xlsx
