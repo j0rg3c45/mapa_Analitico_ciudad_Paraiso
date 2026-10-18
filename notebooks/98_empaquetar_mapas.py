@@ -24,7 +24,7 @@ if PROC is None:
     raise FileNotFoundError("No se encontro la carpeta mapa_html/.")
 
 RAIZ = os.path.dirname(PROC)
-OUT = os.path.join(RAIZ, "output")
+OUT = os.path.join(RAIZ, "compartir_itt_mapas")
 os.makedirs(OUT, exist_ok=True)
 
 # Archivos a incluir en el paquete (solo los del ITT; se omiten los de avance).

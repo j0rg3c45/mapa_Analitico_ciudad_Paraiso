@@ -685,12 +685,12 @@ ignorada por git).
 - `data/1_data_itt/` (crudo, CON PII) sigue ignorado por git; nunca se sube.
 
 ### 18.3 Compartir por correo
-- `notebooks/98_empaquetar_mapas.py` arma `output/Mapas_ITT_Ciudad_Paraiso_<fecha>.zip`
-  con los HTML del ITT + `LEEME.txt` (como abrir, requisitos: internet + Chrome/Edge).
-  El ZIP (~4 MB) cabe en un correo estandar (limite ~25 MB). `output/*.zip` no se
-  versiona.
+- `notebooks/98_empaquetar_mapas.py` arma
+  `compartir_itt_mapas/Mapas_ITT_Ciudad_Paraiso_<fecha>.zip` con los HTML del ITT +
+  `LEEME.txt` (como abrir, requisitos: internet + Chrome/Edge). El ZIP (~4 MB) cabe en un
+  correo estandar (limite ~25 MB). La carpeta `compartir_itt_mapas/` NO se versiona.
 
 ### 18.4 Scripts auxiliares (notebooks/)
 - `97_publicar_datos_sin_pii.py` -> genera `data_publico/data_itt_publico.zip` (sin PII).
-- `98_empaquetar_mapas.py` -> genera el ZIP de mapas para correo (en `output/`).
+- `98_empaquetar_mapas.py` -> genera el ZIP de mapas para correo (en `compartir_itt_mapas/`).
 - `99_indice_mapas.py` -> genera `mapa_html/index.html` (portada que enlaza los mapas).

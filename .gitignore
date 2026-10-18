@@ -82,9 +82,11 @@ output/deck_output/*
 !output/deck_output/.gitkeep
 
 # ------------------------------------------------------------
-# Paquetes para compartir (output/): ZIP de mapas HTML regenerables.
-# NO se versionan (se reconstruyen con notebooks/98_empaquetar_mapas.py).
+# Paquetes para compartir (compartir_itt_mapas/): ZIP de mapas HTML regenerables
+# para enviar por correo. NO se versionan (se reconstruyen con
+# notebooks/98_empaquetar_mapas.py). Tambien se ignora el ZIP si quedara en output/.
 # ------------------------------------------------------------
+compartir_itt_mapas/
 output/*.zip
 
 # ------------------------------------------------------------
