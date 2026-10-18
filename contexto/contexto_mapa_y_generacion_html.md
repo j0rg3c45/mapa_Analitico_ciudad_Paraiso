@@ -272,3 +272,64 @@ interactivo de eventos de seguridad con panel colapsable de serie de tiempo.
 | `mapa_avance_caracterizacion.html` | ~2.61 MB |
 | `mapa_avance_caracterizacion_ejecutivo.html` | ~2.59 MB |
 | `mapa_seguridad_calor.html` | ~11.2 MB |
+
+---
+
+## 8. Dimension Entorno Urbano: mapa dedicado (NDVI, deficit, arboles)
+
+Notebook propio `notebooks/03_mapa_entorno_urbano.ipynb` (mapa separado, no se integra al
+ITT por naturaleza visual distinta de las capas y para no sobrecargar un solo HTML).
+Requiere `rasterio` (instalado en el entorno unico con `uv pip install --python
+C:\Users\Jorge\.venv\Scripts\python.exe rasterio`).
+
+### 8.1 Datos (reales, en `data/5_Dimension_Entorno_Urbano/`)
+
+- **NDVI**: 4 rasters anuales `ciudad_Paraiso_ndvi/ciudad_Paraiso_ndvi_YYYY.tif`
+  (2023-2026, 74x61 px, WGS84). NDVI promedio: 2023=0.095, 2024=0.110, 2025=0.110,
+  2026=0.099 (bajo, zona urbana densa). Cobertura espacial reducida (nucleo de la zona).
+- **Censo arboreo**: `CENSO_ARBOREO_ciudad_Paraiso.geojson` (312 puntos, comuna 3).
+  Estados: Nuevo 170, Vivo 133, Muerto 7, Eliminado 2.
+- **Deficit habitacional**: `sec_vivienda/DEF_HAB_SISBEN.shp` (386 poligonos SISBEN,
+  EPSG:6249). Campo mapeado `F_HOG_DE_1` = deficit habitacional total (cuantitativo +
+  cualitativo). % deficit: min 0, promedio 44.5, max 100. 6 poligonos con T_HOG=0.
+- **PII - NO versionar**: `sec_vivienda/*SUBSIDIOS*.xlsx` contiene nombre, cedula y
+  direccion de beneficiarios. Excluido en `.gitignore`.
+
+### 8.2 Capas del mapa (colores accesibles daltonismo)
+
+- **NDVI por anio** como `folium.raster_layers.ImageOverlay` (PNG RGBA generados en
+  `data_processed_geo/ndvi_YYYY.png`), conmutable, 2026 activo. Rampa secuencial VERDE
+  ColorBrewer Greens `{0:#edf8e9, 0.4:#a1d99b, 0.7:#41ab5d, 1:#00441b}`, normalizada a
+  rango fijo NDVI 0..0.6, nodata transparente.
+- **Deficit habitacional** como coropleta de los 386 poligonos. Rampa secuencial MORADA
+  ColorBrewer Purples `{0:#f2f0f7, 0.5:#9e9ac8, 1:#54278f}`. Regla **MIN_N=5**:
+  poligonos con T_HOG<5 (o =0) en gris, popup solo con conteo.
+- **Censo arboreo**: `CircleMarker` por estado (verde Okabe-Ito #009E73 vivos/nuevos,
+  gris #333333 muertos/eliminados) + capa `HeatMap` de densidad (gradiente Greens).
+- Panel colapsable (max-width 480px, Chart.js) con serie anual del NDVI promedio y
+  resumen de arboles por estado.
+- Mismos estandares comunes (ver 7.4): capas base sin OSM, zoom fraccional, max_zoom=22,
+  poligono dorado, mascara de foco, pantalla completa.
+
+### 8.3 Tamanios (data_processed_geo/, ignorada por git)
+
+| Archivo | Tamano |
+|---|---|
+| `mapa_entorno_urbano.html` | ~7.31 MB |
+| `ndvi_2023.png` .. `ndvi_2026.png` | ~0.01 MB c/u |
+
+---
+
+## 9. Estado de los mapas del proyecto (resumen)
+
+Cuatro mapas por proposito, misma arquitectura Folium + estandares comunes:
+
+| Mapa | Notebook | Datos | HTML |
+|---|---|---|---|
+| Geoanalitica ITT | `02_...itt.ipynb` sec. 5-10 | catastral real + eventos sinteticos | `mapa_geoanalitica_itt.html` ~1.8 MB |
+| Avance caracterizacion | `02_...itt.ipynb` sec. 11 | encuesta real (501 ciudadanos) | `mapa_avance_caracterizacion[_ejecutivo].html` ~2.6 MB |
+| Seguridad (calor) | `02_...itt.ipynb` sec. 12 | DATIC real (8450 eventos) | `mapa_seguridad_calor.html` ~11 MB |
+| Entorno Urbano | `03_mapa_entorno_urbano.ipynb` | NDVI + arboles + deficit reales | `mapa_entorno_urbano.html` ~7.3 MB |
+
+Pendiente: proceso del deck PMU (ver `contexto_deck_reporte_pmu.md`); otras dimensiones
+del ITT (movilidad, desarrollo economico, desarrollo social) si llegan sus datos.
