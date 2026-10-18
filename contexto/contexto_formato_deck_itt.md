@@ -94,3 +94,49 @@ export) produce una lamina con la MISMA estructura del deck.
    por dimension; el `itt` sigue uniforme (58.5) y los scores por dimension vacios. No se
    calcula el ITT por manzana en este momento. Las laminas usan las capas y cifras ya
    disponibles.
+
+---
+
+## 6. Estado actual del export y PENDIENTE (lamina estructurada tipo deck)
+
+### 6.1 Lo que ya funciona
+- Botones "Exportar JPG" / "Exportar PDF" en los 5 mapas (seccion 13.1 del contexto de
+  mapas).
+- Dialogo "Guardar como" (`showSaveFilePicker`, Chrome/Edge) con nombre sugerido
+  `deck_<dimension>_<AAAA-MM-DD>`; fallback a descarga normal en Firefox/Safari.
+- Captura la vista actual del usuario (no re-centra), con el panel de graficas + leyenda +
+  encabezado temporal (titulo + corte + fuente), sobre fondo claro (sin mapa base por CORS).
+
+### 6.2 PENDIENTE confirmado por el usuario
+La captura actual NO sale con la ESTRUCTURA del deck. Hoy el export toma el div del mapa
+con el panel flotante SUPERPUESTO encima (mapa a pantalla completa + tarjeta arriba-izq),
+mientras el deck pide una composicion en columnas:
+
+```
++-----------------------------------------------------------+
+| Seccion - Titulo                                          |
++---------------------------+-------------------------------+
+| CIFRA GRANDE              |                               |
+| periodo / delta %         |        MAPA (coropleta)       |
+| mini-serie 2023-2026      |                               |
++---------------------------+-------------------------------+
+| Corte - Fuente - Mapa ilustrativo                         |
++-----------------------------------------------------------+
+```
+
+### 6.3 Plan propuesto para resolverlo (a implementar)
+Para que la lamina salga en la estructura del deck, el export NO debe capturar el mapa
+directo, sino construir y capturar una LAMINA HTML dedicada (un contenedor con grid de 2
+columnas):
+- Al pulsar "Exportar lamina (deck)": generar un div-lamina temporal (fuera de pantalla o
+  modal) con: encabezado (seccion + titulo), columna izquierda (cifra grande + periodo +
+  delta + mini-serie reutilizando el Chart.js o un SVG), columna derecha = imagen del mapa
+  (captura previa del contenedor del mapa con html2canvas), y pie (corte + fuente).
+- Capturar ese div-lamina con html2canvas y exportar JPG/PDF (con el dialogo Guardar como
+  ya implementado) a `output/deck_output/`.
+- Una lamina por dimension; cifras tomadas de los datos de cada mapa (las que ya se
+  muestran en el panel). ITT por manzana NO se calcula (decision vigente): la coropleta va
+  con la simbologia disponible.
+
+Esto es un cambio de fondo del modo de export (de "captura del mapa" a "lamina compuesta");
+se implementara cuando el usuario lo confirme.
