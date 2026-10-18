@@ -548,3 +548,58 @@ Resumen de los ajustes de visualizacion aplicados a los mapas (principalmente se
 - Posicion top:20px left:20px, fondo claro, redondeado, colapsable (`<details>`).
   Seguridad: #seg-panel ("Seguridad - resumen", series anual doble eje con Chart.js).
   Entorno urbano: #eu-panel (serie NDVI anual).
+  Movilidad: #mov-panel (serie anual de siniestros por severidad, eje unico).
+  Desarrollo social: #ds-panel (serie anual de rinas y spa, eje unico).
+- El helper de export (`agregar_export`) oculta/clona el panel por id; cada notebook amplia
+  el selector para incluir su panel (`#seg-panel, #eu-panel, #mov-panel, #ds-panel`).
+
+---
+
+## 14. Dimension Movilidad (notebook 04)
+
+Notebook `notebooks/04_mapa_movilidad.ipynb`. Mapa de la dimension Movilidad del ITT
+(peso 22%) con datos reales de `data/1_data_itt/`. Salida:
+`data_processed_geo/mapa_movilidad.html` (~0.9 MB, ignorada por git).
+
+### 14.1 Datos
+- `06_movilidad_siniestros.geojson` (97 puntos): siniestros viales con campo
+  `clasificacion_severidad` (lesionados 81, mortal 8, solo_danos 8), `clase_acci` y
+  `fecha_evento` (2023-2026).
+- `07_movilidad_red_peatonal_osm.geojson` (400 lineas, OSM): red peatonal con `highway` y
+  `length`; longitud total en zona ~21.6 km.
+
+### 14.2 Capas
+- **Puntos de siniestros por severidad** (CircleMarker): mortales (bermellon, radio 6,
+  ACTIVA al inicio), lesionados (naranja), solo danos (azul claro). Popup SIN PII (fecha +
+  clase). Filtrados a `fecha_evento >= 2025-09-01`.
+- **Calor: siniestros** (HeatMap, rampa Oranges): usa TODOS los siniestros en zona.
+- **Red peatonal (OSM)**: lineas coloreadas por tipo de via (footway/pedestrian/
+  residential/service/tertiary/secondary/primary), Okabe-Ito.
+- Comparte: capas base Google, mascara oscura, limite dorado, panel #mov-panel (serie anual
+  por severidad, eje unico), slider de calor, boton "Exportar lamina (deck)".
+
+## 15. Dimension Desarrollo Social / Convivencia (notebook 05)
+
+Notebook `notebooks/05_mapa_desarrollo_social.ipynb`. UN solo mapa que integra las tres
+variables de la dimension (peso 19%: VIF + rinas + SPA). Salida:
+`data_processed_geo/mapa_desarrollo_social.html` (~0.6 MB, ignorada por git).
+
+### 15.1 Datos
+- `09_seguridad_vif_calor_poligonal.geojson` (28 manzanas): VIF agregado por manzana
+  (`vif_casos`, `vif_densidad_ha`). 34 casos en 18 manzanas. NUNCA puntos (regla de
+  privacidad VIF del proyecto).
+- `04_convivencia_rinas.geojson` (253) y `05_convivencia_spa.geojson` (350): puntos con
+  `fecha_evento`.
+
+### 15.2 Capas
+- **VIF: densidad por manzana** (coropleta, rampa Purples por densidad de casos/ha, borde
+  morado). ACTIVA al inicio. Popup con casos, densidad y nota de privacidad.
+- **Puntos: rina / spa** (CircleMarker, verde / amarillo) filtrados a
+  `fecha_evento >= 2025-09-01`. Popup SIN PII (fecha + sitio del hecho).
+- **Calor: rina / spa** (HeatMap, rampas Greens / YlOrBr): usan TODOS los eventos en zona.
+- Comparte: capas base Google, mascara oscura, limite dorado, panel #ds-panel (serie anual
+  de rinas y spa, eje unico), slider de calor, boton "Exportar lamina (deck)".
+
+> Nota: rinas y SPA tambien aparecen en el mapa de seguridad (notebook 02) como foto de
+> convivencia; aqui se agrupan con VIF segun la composicion metodologica del ITT
+> (Desarrollo Social = VIF + rinas + SPA).

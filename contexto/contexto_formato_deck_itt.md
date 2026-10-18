@@ -176,8 +176,12 @@ Notas:
 ## 8. Plan por partes (acordado con el usuario)
 
 - **A (HECHO):** boton unico "Exportar lamina (deck)".
-- **B (pendiente):** crear el mapa de la dimension que falta -> MOVILIDAD, con
-  `06_movilidad_siniestros` (97 puntos) y `07_movilidad_red_peatonal_osm` (400 lineas).
+- **B (HECHO):** mapas de las dimensiones que faltaban:
+  - MOVILIDAD -> `notebooks/04_mapa_movilidad.ipynb` (siniestros 06 por severidad + red
+    peatonal 07), salida `mapa_movilidad.html`.
+  - DESARROLLO SOCIAL / CONVIVENCIA -> `notebooks/05_mapa_desarrollo_social.ipynb`
+    (VIF 09 coropleta por manzana + rinas 04 y SPA 05 como puntos+calor), salida
+    `mapa_desarrollo_social.html`.
 - **C (HECHO para seguridad):** el mapa de seguridad ya consume los datos reales de
   `data/1_data_itt/` (hurto 03, rina 04, spa 05, homicidio 02) como fuente oficial, con
   puntos + heatmap propio por categoria. Reemplazo de `seguridad_unificado.geojson`
@@ -198,13 +202,15 @@ corregidos:
 
 ## 10. Que falta (estado al corte)
 
-- **Paso B (pendiente):** crear el mapa de MOVILIDAD (`06_movilidad_siniestros` 97 puntos +
-  `07_movilidad_red_peatonal_osm` 400 lineas) como notebook propio `04_mapa_movilidad.ipynb`,
-  replicando estandares (capas base, zoom, mascara, poligono, panel colapsable con serie,
-  boton lamina deck, slider de calor, colores Okabe-Ito).
-- **Paso C (HECHO para seguridad):** seguridad/convivencia migradas a `data/1_data_itt/`
-  (02-05) como fuente oficial, con 4 categorias (hurto, rina, spa, homicidio), cada una con
-  puntos (filtrados >=2025-09-01) y heatmap propio (todos los anios) + serie anual.
+- **Paso B (HECHO):** mapas de MOVILIDAD (`04_mapa_movilidad.ipynb`) y DESARROLLO SOCIAL /
+  CONVIVENCIA (`05_mapa_desarrollo_social.ipynb`) creados, replicando estandares (capas
+  base, zoom, mascara, poligono, panel colapsable con serie, boton lamina deck, slider de
+  calor, colores Okabe-Ito).
+- **Paso C (HECHO para seguridad):** seguridad migrada a `data/1_data_itt/` (02-05) como
+  fuente oficial, con 4 categorias (hurto, rina, spa, homicidio), cada una con puntos
+  (filtrados >=2025-09-01) y heatmap propio (todos los anios) + serie anual.
+- **Dimension pendiente:** DESARROLLO ECONOMICO (15%) no tiene datos en `data/1_data_itt/`
+  ni carpeta propia; su mapa queda bloqueado hasta recibir la fuente (Camara de Comercio).
 - **ITT por manzana:** no se calcula por ahora (decision del usuario).
 - **Deck PMU completo:** 17 laminas (ver `contexto_deck/contexto_presentacion_itt_ciudad_paraiso.md`).
   Hoy solo se exportan laminas por dimension desde cada mapa; el deck completo multi-lamina
