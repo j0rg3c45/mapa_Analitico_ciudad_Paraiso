@@ -84,8 +84,8 @@ El deck consume cifras que YA se trabajan o estan disponibles en el repo:
 
 - **Caracterizacion por manzana / dominios** (Salud, Vivienda, Bienestar): ver el mapa de
   avance de caracterizacion (`notebooks/02_mapa_geoanalitica_itt.ipynb`, seccion 11).
-- **Seguridad** (hurtos, rinas, SPA, homicidios, siniestros, VIF): ver
-  `data/geojson/seguridad_unificado.geojson` y la seccion 12.
+- **Seguridad** (hurto, rina, SPA, homicidio): fuente oficial `data/1_data_itt/` (capas
+  02-05); mapa en `notebooks/02_mapa_geoanalitica_itt.ipynb` seccion 12.
 - **Entorno urbano** (NDVI 2023-2026, censo arboreo, deficit habitacional): datos en
   `data/5_Dimension_Entorno_Urbano/` (pendiente de integrar en su mapa dedicado).
 - **ITT** (indice y niveles): seccion 5 del notebook.

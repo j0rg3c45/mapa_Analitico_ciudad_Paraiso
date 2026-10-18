@@ -178,9 +178,10 @@ Notas:
 - **A (HECHO):** boton unico "Exportar lamina (deck)".
 - **B (pendiente):** crear el mapa de la dimension que falta -> MOVILIDAD, con
   `06_movilidad_siniestros` (97 puntos) y `07_movilidad_red_peatonal_osm` (400 lineas).
-- **C (pendiente):** migrar los mapas existentes a consumir los datos reales del dataset
-  `data/1_data_itt/` como fuente oficial (seguridad/convivencia desde 02-05/09, en vez de
-  `seguridad_unificado.geojson`). Confirmado: `1_data_itt` es la fuente oficial.
+- **C (HECHO para seguridad):** el mapa de seguridad ya consume los datos reales de
+  `data/1_data_itt/` (hurto 03, rina 04, spa 05, homicidio 02) como fuente oficial, con
+  puntos + heatmap propio por categoria. Reemplazo de `seguridad_unificado.geojson`
+  completado. Pendiente: resto de dimensiones conforme existan datos.
 - ITT por manzana: NO se calcula por ahora (decision vigente).
 
 ## 9. Correccion de la lamina (post-validacion del usuario)
@@ -201,8 +202,9 @@ corregidos:
   `07_movilidad_red_peatonal_osm` 400 lineas) como notebook propio `04_mapa_movilidad.ipynb`,
   replicando estandares (capas base, zoom, mascara, poligono, panel colapsable con serie,
   boton lamina deck, slider de calor, colores Okabe-Ito).
-- **Paso C (pendiente):** migrar seguridad/convivencia a los datos de `data/1_data_itt/`
-  (02-05, 09) como fuente oficial, en vez de `seguridad_unificado.geojson`.
+- **Paso C (HECHO para seguridad):** seguridad/convivencia migradas a `data/1_data_itt/`
+  (02-05) como fuente oficial, con 4 categorias (hurto, rina, spa, homicidio), cada una con
+  puntos (filtrados >=2025-09-01) y heatmap propio (todos los anios) + serie anual.
 - **ITT por manzana:** no se calcula por ahora (decision del usuario).
 - **Deck PMU completo:** 17 laminas (ver `contexto_deck/contexto_presentacion_itt_ciudad_paraiso.md`).
   Hoy solo se exportan laminas por dimension desde cada mapa; el deck completo multi-lamina

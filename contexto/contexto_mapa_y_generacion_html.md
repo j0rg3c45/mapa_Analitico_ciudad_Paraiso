@@ -197,9 +197,9 @@ pueden derivarse de datos con PII).
 
 - En el mapa solo hay **agregados por manzana**, nunca puntos de personas.
 - VIF se representa como superficie (HeatMap), nunca como punto individual.
-- Los eventos de seguridad/ambiente son **sinteticos** hasta integrar los datos reales;
-  los popups lo advierten ("Datos de evento SINTETICOS (demo)"). Los indicadores
-  catastrales y el avance de caracterizacion SI son reales.
+- La dimension Seguridad usa **datos reales** de `data/1_data_itt/` (ver seccion 7). Los
+  popups de homicidios no exponen PII (solo fecha). Los indicadores catastrales y el avance
+  de caracterizacion tambien son reales.
 
 ---
 
@@ -208,33 +208,33 @@ pueden derivarse de datos con PII).
 Seccion 12 del notebook `02_mapa_geoanalitica_itt.ipynb`. Mapa de calor (heatmap)
 interactivo de eventos de seguridad con panel colapsable de serie de tiempo.
 
-### 7.1 Datos (reales, DATIC)
+### 7.1 Datos (reales, dataset oficial `data/1_data_itt/`)
 
-- Fuentes crudas en `data/1_Dimension_Seguridad/` (6 GeoJSON, ~11.8 MB): comparendos,
-  homicidios y hurtos, cada uno en dos cortes (historico 2023-2026T1 + reciente 2026).
-- Unificado en `data/geojson/seguridad_unificado.geojson` (3.34 MB, EPSG:4326):
-  - **8.450 eventos** dentro de Ciudad Paraiso, rango **2023-01-01 a 2026-09-30**.
-  - Por categoria: **comparendo 7.695, hurto 718, homicidio 37**.
-  - Esquema: `fecha, anio, mes (YYYY-MM), categoria, subtipo, sitio, lat, lon, fuente, geometry`.
-  - 83 duplicados eliminados; sin columnas PII (nombre/documento/direccion).
-- Serie mensual agregada: `data_processed_geo/seguridad_serie_mensual.csv` (periodo,
-  categoria, conteo).
-- Salida: `data_processed_geo/mapa_seguridad_calor.html` (~11.2 MB; pesa por las capas de
-  puntos, que arrancan apagadas).
+- **Fuente oficial (vigente):** las 4 capas tematicas de `data/1_data_itt/` (reemplaza al
+  antiguo `seguridad_unificado.geojson` y a los eventos sinteticos). Campo de fecha:
+  `fecha_evento`. `data/1_data_itt/` NO se versiona (gitignore) por PII en homicidios.
+  - `03_seguridad_hurtos.geojson` -> **hurto: 722** eventos.
+  - `04_convivencia_rinas.geojson` -> **rina: 253** eventos.
+  - `05_convivencia_spa.geojson` -> **spa: 350** eventos.
+  - `02_seguridad_homicidios.geojson` -> **homicidio: 37** eventos.
+- Rango temporal **2023-2026** (2026 parcial hasta septiembre).
+- Salida: `data_processed_geo/mapa_seguridad_calor.html` (~1.27 MB; ignorada por git).
 
-### 7.2 Heatmap (gradiente por capa, rampas ColorBrewer aptas daltonismo)
+### 7.2 Capas por categoria (puntos + heatmap propio, aptas daltonismo)
 
-- Un `HeatMap` (folium.plugins) por categoria, conmutable. Hurtos activo por defecto.
-- Cada capa tiene su **propio gradiente secuencial** (varia en luminosidad dentro de un
-  matiz, intenso = oscuro; distinguibles entre si y en escala de grises):
-  - Hurtos -> **Blues**: `{0:#eff3ff, 0.4:#9ecae1, 0.7:#4292c6, 1:#08306b}`.
-  - Comparendos -> **Greens**: `{0:#edf8e9, 0.4:#a1d99b, 0.7:#41ab5d, 1:#00441b}`.
-  - Homicidios -> **Reds**: `{0:#fee5d9, 0.4:#fcae91, 0.7:#fb6a4a, 1:#67000d}`.
-  - Coherente con la paleta Okabe-Ito por categoria (azul/verde/rojo).
-- Parametros ajustados a la zona compacta (~26 ha): `radius=18`, `blur=14`,
-  `min_opacity=0.35`. Solo puntos dentro del poligono.
-- Capas de puntos (CircleMarker) por categoria, apagadas por defecto, popups SIN PII
-  (homicidios con popup minimo: solo fecha).
+- **4 categorias**, cada una con su capa de **puntos** ("Puntos: <cat>") y su capa de
+  **calor** ("Calor: <cat>") conmutables de forma independiente en el LayerControl.
+- Cada categoria tiene su **propio gradiente secuencial** (ColorBrewer, intenso = oscuro;
+  distinguibles entre si y en escala de grises), coherente con Okabe-Ito:
+  - Hurto -> **Blues** (`#0072B2`).
+  - Rina -> **Greens** (`#009E73`).
+  - Spa -> **YlOrBr** (`#F0E442`).
+  - Homicidio -> **Reds** (`#D55E00`).
+- **Puntos (CircleMarker):** filtrados a **`fecha_evento >= 2025-09-01`** (foto reciente).
+  Conteos filtrados: hurto **136**, rina **68**, spa **200**, homicidio **6**. Popups SIN
+  PII (homicidios: solo fecha).
+- **Heatmap:** usa TODOS los eventos (sin filtro de fecha). Solo puntos dentro del
+  poligono. Slider de intensidad del calor en el panel.
 
 ### 7.3 Serie de tiempo (panel colapsable)
 
@@ -242,16 +242,19 @@ interactivo de eventos de seguridad con panel colapsable de serie de tiempo.
   izquierda, z-index 9999. Usa `<details>/<summary>` para colapsar.
 - **Ancho del panel: `max-width:480px; width:min(480px,46vw)`.**
 - Grafico con **Chart.js** (CDN jsdelivr), con degradacion a tabla HTML si no carga.
-- Serie **ANUAL** (2023, 2024, 2025, 2026) por categoria.
-- **Doble eje Y** por disparidad de magnitudes:
-  - Eje izquierdo "Cantidad de casos (hurtos / homicidios)".
-  - Eje derecho "Cantidad de comparendos".
+- Serie **ANUAL** (2023, 2024, 2025, 2026) por categoria, usando TODOS los eventos.
+- **Doble eje Y** por disparidad de magnitudes (hurto domina ~16x):
+  - Eje izquierdo "Cantidad de casos (hurto)".
+  - Eje derecho "Cantidad de casos (rina / spa / homicidio)".
   - Nota aclaratoria de doble escala sobre el grafico.
 - Canvas en contenedor de altura fija (200px) con `maintainAspectRatio:false` +
   `responsive:true` para aprovechar el ancho sin distorsion.
-- Colores de linea Okabe-Ito: hurto=OKI_AZUL, comparendo=OKI_VERDE, homicidio=OKI_BERMELL.
-- Totales anuales reales: comparendos 1847/1920/1990/1938; hurtos 257/208/164/89;
-  homicidios 16/6/11/4 (2026 parcial hasta septiembre).
+- Colores de linea Okabe-Ito por categoria (azul/verde/amarillo/bermellon).
+- Totales anuales reales (2026 parcial hasta septiembre):
+  - hurto: **260 / 209 / 164 / 89**.
+  - rina: **29 / 61 / 114 / 49**.
+  - spa: **66 / 28 / 121 / 135**.
+  - homicidio: **16 / 6 / 11 / 4**.
 
 ### 7.4 Parametros comunes de los 3 mapas (ITT, avance, seguridad)
 
@@ -271,7 +274,7 @@ interactivo de eventos de seguridad con panel colapsable de serie de tiempo.
 | `mapa_geoanalitica_itt.html` | ~1.79 MB |
 | `mapa_avance_caracterizacion.html` | ~2.61 MB |
 | `mapa_avance_caracterizacion_ejecutivo.html` | ~2.59 MB |
-| `mapa_seguridad_calor.html` | ~11.2 MB |
+| `mapa_seguridad_calor.html` | ~1.27 MB |
 
 ---
 
@@ -468,9 +471,9 @@ Orden definido (de primera a ultima en el panel):
 1. Limite Ciudad Paraiso (activo)
 2. ITT: manzanas (consolidado)
 3. ITT: estacion Fray Damian (CAI de policia)
-4-7. Puntos: hurto, comparendo, homicidio, homicidios <=300m estacion
-8-10. Calor: hurto, comparendo, homicidio
-11. ITT: demoliciones Cristo Rey (poligono de fondo)
+4-7. Puntos: hurto, rina, spa, homicidio (+ homicidios <=300m estacion)
+8-11. Calor: hurto, rina, spa, homicidio
+12. ITT: demoliciones Cristo Rey (poligono de fondo)
 
 **Mapa entorno urbano (`m_eu`):**
 1. Limite Ciudad Paraiso (activo)
@@ -490,10 +493,17 @@ Las capas base (TileLayer) y la mascara oscura van antes y no son overlays conmu
 Resumen de los ajustes de visualizacion aplicados a los mapas (principalmente seguridad
 `m_seg` y entorno urbano `m_eu`; los de ITT/avance comparten la base comun).
 
-### 13.1 Exportacion de laminas (JPG / PDF)
-- Funcion reutilizable `agregar_export(mapa, titulo, slug)` en ambos notebooks. Botones
-  "Exportar JPG" y "Exportar PDF" (esquina superior derecha). Librerias html2canvas@1.4.1
-  y jsPDF@2.5.1 por CDN. Una figura por clic. Nombre: `ITT_<slug>_<AAAA-MM-DD>`.
+### 13.1 Exportacion de laminas (boton unico "Exportar lamina (deck)")
+- Funcion reutilizable `agregar_export(mapa, titulo, slug)` en ambos notebooks. **Un solo
+  boton "Exportar lamina (deck)"** (esquina superior derecha) que genera un PDF con dialogo
+  "Guardar como" (`showSaveFilePicker` + fallback a descarga en Firefox/Safari). Librerias
+  html2canvas@1.4.1 y jsPDF@2.5.1 por CDN. Una lamina por dimension. Nombre sugerido:
+  `ITT_<slug>_<AAAA-MM-DD>`.
+- El grafico de tendencia se captura como imagen real del canvas (`toDataURL('image/png')`
+  + `replaceChild`), porque clonar el canvas lo copia vacio.
+- Alineacion de capas en la lamina: `fitBounds(ZONA_BOUNDS, {padding:[10,10], maxZoom:17,
+  animate:false})` + `once('moveend')` + `invalidateSize()` + delay 350ms (evita el
+  desplazamiento de overlays al imprimir).
 - **Captura la VISTA ACTUAL** del usuario: NO re-centra con fitBounds (se elimino la
   llamada a `ajustarZona`). El encuadre/zoom/capas que el usuario deja en pantalla es lo
   que se descarga.
@@ -529,11 +539,10 @@ Resumen de los ajustes de visualizacion aplicados a los mapas (principalmente se
   22 (entorno). Afecta todas las heat layers a la vez; no afecta coropletas ni graficas.
 
 ### 13.5 Filtro temporal de la capa de PUNTOS (solo seguridad)
-- Las capas "Puntos: hurto/comparendo/homicidio" muestran SOLO eventos con fecha
-  >= 2025-09-01 (2026 completo + desde septiembre 2025): hurto 136, comparendo 2580,
-  homicidio 6 (total 2722 de 8450).
+- Las capas "Puntos: hurto/rina/spa/homicidio" muestran SOLO eventos con `fecha_evento`
+  >= 2025-09-01 (2026 + desde septiembre 2025): hurto 136, rina 68, spa 200, homicidio 6.
 - Los **mapas de calor** (HeatMap) y las **graficas de tendencia** NO se filtran: siguen
-  usando todos los eventos (8450, 2023-2026).
+  usando todos los eventos (hurto 722, rina 253, spa 350, homicidio 37; 2023-2026).
 
 ### 13.6 Panel de graficas
 - Posicion top:20px left:20px, fondo claro, redondeado, colapsable (`<details>`).
