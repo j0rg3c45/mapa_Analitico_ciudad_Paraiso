@@ -6,6 +6,52 @@ Paraiso. Usar coma como separador decimal en textos; punto en codigo.
 
 ---
 
+## 0. Como interpretar el IPM (guia de lectura)
+
+La escala del IPM funciona igual que una **tasa de reprobados en un salon de clases**.
+Va de 0% a 100% (o 0.0 a 1.0) y representa el **porcentaje de personas que viven en
+hogares pobres multidimensionalmente**.
+
+- **0%:** en esa zona nadie es pobre multidimensional (cero carencias criticas acumuladas).
+- **100%:** en esa zona todos son pobres multidimensionales.
+- **12,59% (media Cali urbano):** de cada 100 personas, ~13 viven en hogares que acumulan
+  33% o mas de privaciones basicas.
+- **26,52% (Ciudad Paraiso):** de cada 100 personas, casi 27 viven en hogares con
+  privaciones criticas acumuladas (mas del doble que el promedio de la ciudad).
+- **7,51% (Roosevelt):** de cada 100 personas, solo ~7-8 estan en esa condicion.
+
+### Escala de referencia estandar para Colombia (area urbana)
+
+Aunque tecnicamente llega a 100%, en ciudades colombianas los valores urbanos se
+clasifican asi:
+
+| Rango IPM (%) | Nivel | Significado practico | Ejemplo en el estudio |
+| :--- | :--- | :--- | :--- |
+| 0,0 - 8,0 | Muy bajo / Bajo | Zonas consolidadas (estratos 4-6). Cobertura casi total de servicios, empleo formal, buen nivel educativo. | Roosevelt (7,51%) |
+| 8,1 - 15,0 | Medio / Tipico urbano | Promedio de una capital. Servicios basicos y vivienda aceptable, pero pesa la informalidad o adultos sin bachillerato. | Cali urbano (12,59%), Barrio Obrero (13,18%) |
+| 15,1 - 25,0 | Alto | Sectores populares vulnerables. Alta desercion escolar, hacinamiento frecuente, empleo informal generalizado. | Comunas perifericas de ladera u oriente |
+| > 25,0 | Critico / Severo | Zonas deprimidas, inquilinatos precarios o asentamientos informales. Se acumulan fallas de vivienda, saneamiento, educacion e ingresos. | Ciudad Paraiso (26,52%) |
+
+### El "truco" de las dos etapas (no confundir dos porcentajes)
+
+Hay DOS porcentajes distintos que suelen confundirse:
+
+1. **El 33% (el examen del hogar):** regla fija para decidir si UN hogar es pobre. A cada
+   hogar se le suman sus carencias (pisos de tierra, no cotizar pension, ninos sin
+   estudiar, etc.). Si suma 33% o mas, ese hogar "reprobo" y se cataloga como pobre.
+2. **El IPM final (el reporte de la zona):** el porcentaje de gente de la zona que vive en
+   esos hogares que "reprobaron".
+
+En resumen: el IPM de las tablas (7,51% · 13,18% · 26,52%) es el **porcentaje de
+habitantes en situacion de pobreza multidimensional en cada poligono**. Entre mas alto el
+numero, mas pobre y vulnerable es la zona.
+
+> Nota de uso en los mapas: en las coropletas por manzana el valor `ipm` es el indice
+> 0-100 de cada manzana (misma logica: mayor = mas pobreza). La paleta viridis refuerza
+> la lectura (ver `contexto_ipm_ics.md`).
+
+---
+
 ## 1. Serie anual de incidencia del IPM en Cali (medida estandar)
 
 Medida estandar de referencia del IPM: **porcentaje de hogares en pobreza
