@@ -577,6 +577,8 @@ Notebook `notebooks/04_mapa_movilidad.ipynb`. Mapa de la dimension Movilidad del
   (morado, 2), Caida ocupante (naranja, 2), Otro (verde, 1), Sin dato (gris, 9). Usan
   TODOS los siniestros en zona (97, sin filtro de fecha) para que la distribucion por
   clase sea visible. Popup con clase + severidad + fecha (sin PII).
+- El panel #mov-panel muestra el desglose del total de siniestros por clase ("Siniestros
+  por clase": Choque 59, Atropello 24, ...) ademas del de severidad.
 - **Calor: siniestros** (HeatMap, rampa Oranges): usa TODOS los siniestros en zona.
 - **Red peatonal (OSM)**: lineas coloreadas por tipo de via (footway/pedestrian/
   residential/service/tertiary/secondary/primary), Okabe-Ito.
@@ -643,6 +645,9 @@ Micro 305, Pequena 17, Mediana 4, Grande 2.
   inicio), Cancelado (bermellon). Popup comercial SIN PII, enriquecido con: sector,
   actividad (CIIU), tipo (natural/juridica), tamano de empresa, empleo (personal ocupado),
   ultima renovacion y activo total.
+- **Puntos de negocios por TAMANO de empresa** (conmutables, apagadas): Grande (bermellon,
+  radio 10), Mediana (naranja, 7), Pequena (verde, 5), Micro (azul claro, 3). Radio
+  proporcional al tamano. Conteo en zona: Micro 305, Pequena 17, Mediana 4, Grande 2.
 - **Calor: densidad economica** (HeatMap, rampa Blues): todos los negocios en zona.
 - **Educacion: sedes** (CircleMarker morado, radio 6): capa de equipamiento, apagada.
 - Panel #eco-panel: serie anual de renovaciones de matricula (proxy de actividad), eje
