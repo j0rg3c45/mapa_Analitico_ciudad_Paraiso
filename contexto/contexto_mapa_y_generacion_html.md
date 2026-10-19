@@ -765,8 +765,14 @@ Salida: `mapa_html/mapa_ics.html`.
   repo (datos agregados por manzana, sin PII), por lo que Colab las obtiene con el clone.
 
 ### 20.3 Mapa IPM (nb 08) actualizado
-- Migrado a la fuente oficial `IPM_ciudad_Paraiso.geojson` (33 manzanas), con la **escala
-  viridis de 8 categorias** y **leyenda de paleta** flotante (abajo-derecha, `ipm-leyenda`).
+- Fuente oficial `IPM_ciudad_Paraiso.geojson` (33 manzanas). Coropleta tipo **CALOR** con
+  la **escala de 4 niveles (Colombia urbano)**: Muy bajo/Bajo 0-8 (verde), Medio/Tipico
+  8,1-15, Alto 15,1-25, Critico/Severo >25 (rojo); rango 0-100. Leyenda de paleta
+  (`ipm-leyenda`) y panel con distribucion de manzanas por nivel (Ciudad Paraiso: 3 / 4 /
+  8 / 18). El umbral de pobreza (33,3) se indica en la leyenda.
+- La misma escala IPM de 4 niveles se aplica a la capa `Ref IPM` de los mapas 02-07 y al
+  mapa ITT general (nb 02). El ICS se mantiene en cividis de 8 categorias (indicador
+  directo). El laboratorio (nb 09) conserva la escala comun de 8 para comparar IPM vs ICS.
 
 ### 20.4 Capas de referencia IPM/ICS en los mapas de dimension (02-07)
 - Cada mapa de dimension incluye ahora DOS capas de referencia (apagadas):

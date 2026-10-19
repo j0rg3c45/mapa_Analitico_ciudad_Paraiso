@@ -166,8 +166,9 @@ Opcional segun dimension: `ITT: homicidios <=300m estacion`
 tema lo amerite (seguridad).
 
 Capas de referencia socioeconomica (TAMBIEN en todos los mapas, apagadas):
-- `Ref IPM: pobreza por manzana` -> coropleta IPM, **paleta viridis**, escala oficial de
-  8 categorias (ver `contexto_ipm_ics.md`).
+- `Ref IPM: pobreza por manzana` -> coropleta IPM tipo CALOR, **escala de 4 niveles
+  (Colombia urbano)**: Muy bajo/Bajo 0-8 (verde #1a9850), Medio/Tipico 8,1-15 (#a6d96a),
+  Alto 15,1-25 (#fdae61), Critico/Severo >25 (rojo #d73027). Rango 0-100.
 - `Ref ICS: condicion social por manzana` -> coropleta ICS, **paleta cividis**, misma
   escala de 8 categorias.
 - Fuente oficial unica: `data/geojson/IPM_ciudad_Paraiso.geojson` (33 manzanas; trae
