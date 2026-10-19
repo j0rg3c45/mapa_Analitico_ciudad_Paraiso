@@ -14,6 +14,11 @@ data/*.csv
 data/**/*.csv
 *.xlsx
 
+# Excepcion: datos IPM agregados por manzana/comuna (SIN PII) SI se versionan,
+# para que el notebook de analitica IPM corra tambien en Colab con el clone.
+!data/IPM/
+!data/IPM/*.xlsx
+
 # Carpeta de trabajo que el notebook genera al ejecutarse: imita el
 # bucket (raw/ con los .xlsx copiados y curated/ con las salidas).
 # Contiene PII copiada, por lo que NO se versiona en ninguna ubicacion.
