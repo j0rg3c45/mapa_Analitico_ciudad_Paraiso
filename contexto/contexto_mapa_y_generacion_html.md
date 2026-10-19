@@ -572,6 +572,11 @@ Notebook `notebooks/04_mapa_movilidad.ipynb`. Mapa de la dimension Movilidad del
 - **Puntos de siniestros por severidad** (CircleMarker): mortales (bermellon, radio 6,
   ACTIVA al inicio), lesionados (naranja), solo danos (azul claro). Popup SIN PII (fecha +
   clase). Filtrados a `fecha_evento >= 2025-09-01`.
+- **Puntos de siniestros por CLASE de accidente** (`clase_acci` normalizado a 5 clases +
+  sin dato): Choque (azul, 59, activa al inicio), Atropello (bermellon, 24), Volcamiento
+  (morado, 2), Caida ocupante (naranja, 2), Otro (verde, 1), Sin dato (gris, 9). Usan
+  TODOS los siniestros en zona (97, sin filtro de fecha) para que la distribucion por
+  clase sea visible. Popup con clase + severidad + fecha (sin PII).
 - **Calor: siniestros** (HeatMap, rampa Oranges): usa TODOS los siniestros en zona.
 - **Red peatonal (OSM)**: lineas coloreadas por tipo de via (footway/pedestrian/
   residential/service/tertiary/secondary/primary), Okabe-Ito.
