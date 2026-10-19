@@ -814,3 +814,16 @@ Notebook `notebooks/12_mapa_ipm_series.ipynb`. Salida `mapa_html/mapa_ipm_series
 Notebook `notebooks/11_analitica_ipm.ipynb`. Grafico comparativo de barras agrupadas
 **Cali vs Ciudad Paraiso (Comuna 3)** por variable IPM, anio mas reciente (2025). Exporta
 PNG a `data_processed_geo/`. Fuente: `data/IPM/` (versionada, agregados sin PII).
+
+### 21.3 Mapa IPM por dimension (nb 13)
+Notebook `notebooks/13_mapa_ipm_dimensiones.ipynb`. Salida
+`mapa_html/mapa_ipm_dimensiones.html`.
+- **5 capas coropleta conmutables por dimension** (Educacion, Trabajo, Salud, Vivienda,
+  Servicios), rampa tipo calor verde->amarillo->rojo (0-100). Valor de dimension por
+  manzana = promedio de sus variables.
+- **Panel reactivo:** al hacer click en una manzana, dibuja dos graficos de barras
+  (Chart.js): las 5 dimensiones y las 15 variables de esa manzana (ordenadas de mayor a
+  menor). Vista inicial = promedio de la zona.
+- Fuente de variables: `data/IPM/IPM_Unificado_Variables.xlsx` cruzado por COD_MZN
+  (homologado 24->22). 31 de 33 manzanas con dato; el resto en gris.
+- Dimension mas critica de la zona: Trabajo (informalidad ~95%).

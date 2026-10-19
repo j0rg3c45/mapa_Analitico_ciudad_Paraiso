@@ -52,6 +52,8 @@ CATALOGO = [
      "Indice de Condicion Social por manzana (escala 8 categorias, cividis).", OKI_AZUL_C),
     ("mapa_ipm_series.html", "IPM - Serie temporal", None,
      "IPM por manzana (corte unico) + evolucion del IPM de la comuna 2019-2025.", OKI_MORADO),
+    ("mapa_ipm_dimensiones.html", "IPM - Por dimension", None,
+     "Coropletas por dimension (educacion, trabajo, salud, vivienda, servicios); barras por manzana al dar clic.", OKI_BERMELL),
 ]
 
 # Dimensiones sin datos todavia (se muestran deshabilitadas).
