@@ -648,6 +648,10 @@ Micro 305, Pequena 17, Mediana 4, Grande 2.
 - **Puntos de negocios por TAMANO de empresa** (conmutables, apagadas): Grande (bermellon,
   radio 10), Mediana (naranja, 7), Pequena (verde, 5), Micro (azul claro, 3). Radio
   proporcional al tamano. Conteo en zona: Micro 305, Pequena 17, Mediana 4, Grande 2.
+- **Puntos de negocios por SECTOR ECONOMICO** (conmutables, apagadas): agrupados en 7
+  grupos para legibilidad -> Comercio y reparacion (143), Industria manufacturera (72),
+  Otros sectores (42), Agua y saneamiento (24), Otros servicios (19), Alojamiento y comida
+  (18), Inmobiliarias (10). Texto de `sector_economico` normalizado (encoding).
 - **Calor: densidad economica** (HeatMap, rampa Blues): todos los negocios en zona.
 - **Educacion: sedes** (CircleMarker morado, radio 6): capa de equipamiento, apagada.
 - Panel #eco-panel: serie anual de renovaciones de matricula (proxy de actividad), eje
