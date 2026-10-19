@@ -64,7 +64,10 @@ WHITELIST = {
     # a persona natural comerciante). Se deja estado, fechas, cifras agregadas y CIIU.
     "13_desarrollo_economico_negocios.geojson": [
         "estado", "fecharenovacion", "fechamatricula", "fechacancelacion",
-        "ingresosordinarios", "activototal", "utilidadoperacional", "codigo_ciiu"],
+        "ingresosordinarios", "activototal", "utilidadoperacional", "codigo_ciiu",
+        # Atributos ampliados (sin PII): empleo, actividad y clasificacion.
+        "empleo_personal_ocupado", "descripcion_ciiu", "sector_economico",
+        "categoria", "tamano_empresa"],
     # Educacion: nombres de sedes (equipamiento publico), sin PII personal.
     "14_educacion_sedes.geojson": ["eenomsede", "eenomcorto", "eeclasede",
                                    "eeestado", "eecomcor", "eebarver", "dist_poligono_m"],

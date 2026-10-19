@@ -623,10 +623,21 @@ del ITT (peso 15%). Salida: `data_processed_geo/mapa_desarrollo_economico.html`
   `activototal`, `utilidadoperacional`, `codigo_ciiu`.
 - `14_educacion_sedes.geojson` (6 sedes): equipamiento educativo de contexto.
 
+### 16.1b Atributos economicos (Camara de Comercio, ampliados)
+La capa `13` trae ahora atributos adicionales que enriquecen el popup y el resumen (sin
+PII): `empleo_personal_ocupado` (327/328), `descripcion_ciiu` (328), `sector_economico`
+(328), `categoria` (persona natural/juridica), `tamano_empresa` (micro/pequena/mediana/
+grande). Se normaliza el texto (varios vienen con "?" por encoding) y se unifica
+`tamano` (PEQUENA/PEQUE?A -> Pequena). Totales de la zona: **empleo 900**, por tamano
+Micro 305, Pequena 17, Mediana 4, Grande 2.
+> La capa cruda tambien trae PII (`razonsocial`, `nit_identificacion`, `telefono`,
+> `email`, `direccion`): NO se muestra en popups ni se exporta al ZIP publico.
+
 ### 16.2 Capas
 - **Puntos de negocios por estado** (CircleMarker): Registro Activo (verde, ACTIVA al
-  inicio), Cancelado (bermellon). Popup comercial sin PII personal (actividad, ultima
-  renovacion, activo total).
+  inicio), Cancelado (bermellon). Popup comercial SIN PII, enriquecido con: sector,
+  actividad (CIIU), tipo (natural/juridica), tamano de empresa, empleo (personal ocupado),
+  ultima renovacion y activo total.
 - **Calor: densidad economica** (HeatMap, rampa Blues): todos los negocios en zona.
 - **Educacion: sedes** (CircleMarker morado, radio 6): capa de equipamiento, apagada.
 - Panel #eco-panel: serie anual de renovaciones de matricula (proxy de actividad), eje
