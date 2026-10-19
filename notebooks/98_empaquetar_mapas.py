@@ -39,6 +39,7 @@ INCLUIR = [
     "mapa_vivienda.html",
     "mapa_ipm.html",
     "mapa_ics.html",
+    "mapa_ipm_series.html",
 ]
 
 # README que viaja dentro del ZIP.
@@ -72,6 +73,7 @@ Que contiene
 - mapa_vivienda.html .................. Vivienda (deficit habitacional por barrio).
 - mapa_ipm.html ....................... IPM (pobreza multidimensional por manzana).
 - mapa_ics.html ....................... ICS (condicion social por manzana).
+- mapa_ipm_series.html ................ IPM por manzana + serie temporal de la comuna.
 
 Como usar cada mapa
 -------------------

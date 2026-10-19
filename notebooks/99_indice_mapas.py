@@ -50,6 +50,8 @@ CATALOGO = [
      "Indice de Pobreza Multidimensional por manzana y variables de privacion.", OKI_MORADO),
     ("mapa_ics.html", "ICS - Condicion social", None,
      "Indice de Condicion Social por manzana (escala 8 categorias, cividis).", OKI_AZUL_C),
+    ("mapa_ipm_series.html", "IPM - Serie temporal", None,
+     "IPM por manzana (corte unico) + evolucion del IPM de la comuna 2019-2025.", OKI_MORADO),
 ]
 
 # Dimensiones sin datos todavia (se muestran deshabilitadas).

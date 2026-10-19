@@ -792,3 +792,25 @@ Salida: `mapa_html/mapa_ics.html`.
   eventos Leaflet `overlayadd`/`overlayremove`. Se ocultan al apagar la capa.
 - Funcion reutilizable `_add_ipm_ics_ref(mapa)` (reemplaza al antiguo `_add_ipm_ref`).
 - El mapa ITT general (nb 02) usa la fuente oficial para su referencia IPM.
+
+---
+
+## 21. Mapa de IPM por anos (notebook 12) y analitica IPM (notebook 11)
+
+### 21.1 Mapa IPM serie temporal (nb 12)
+Notebook `notebooks/12_mapa_ipm_series.ipynb`. Salida `mapa_html/mapa_ipm_series.html`.
+- Coropleta IPM por manzana (corte unico censal), escala de 4 niveles tipo calor; manzanas
+  sin dato en gris. Capas transversales ITT + Ref IPM/ICS + leyenda.
+- Panel: **grafico de linea con la evolucion del IPM de Ciudad Paraiso (Comuna 3)
+  2019-2025** (rojo) + Cali como referencia (gris punteado) + **tabla de serie**.
+- Fuente de la serie: `data/IPM/Estadisticas_Distritales_IPM_periodica.xlsx` (hoja Comuna =
+  IPM por comuna/ano; hoja Anio = Cali). Serie C3: 2019=9,6 / 2020=0,0* / 2021=24,1 /
+  2022=16,7 / 2023=18,9 / 2024=24,5 / 2025=29,2. (*2020 base muy pequena, no representativo.)
+- Importante: el mapa por manzana NO cambia por ano (es un corte unico); la variacion anual
+  es a nivel de comuna (panel). El IPM 2025 de la comuna (29,2) difiere del promedio por
+  manzana de la zona (26,5) por ser calculos distintos (comuna completa vs recorte).
+
+### 21.2 Analitica IPM (nb 11)
+Notebook `notebooks/11_analitica_ipm.ipynb`. Grafico comparativo de barras agrupadas
+**Cali vs Ciudad Paraiso (Comuna 3)** por variable IPM, anio mas reciente (2025). Exporta
+PNG a `data_processed_geo/`. Fuente: `data/IPM/` (versionada, agregados sin PII).
