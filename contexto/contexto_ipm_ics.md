@@ -214,3 +214,24 @@ Obrero = 13,18 · Roosevelt = 7,51.
 ### Pendiente / opcional
 - Confirmar si el mapa dedicado de IPM debe mostrar tambien ICS como capa alterna (hoy el
   laboratorio ya ofrece ambas).
+
+
+---
+
+## 7. Replica IPM para Barrio Obrero (segunda zona de estudio)
+
+Se replico el analisis de IPM (sin ITT ni capas transversales de Ciudad Paraiso) para la
+zona **Barrio Obrero** (Comuna 9, Cali), 16 manzanas.
+
+- **Datos:** `data/Barrio_Obrero_geojson/` -> `IPM_BARRIO_OBRERO_2_POLIGONOS/IPM_Barrio_Obrero_V1.geojson`
+  (misma estructura que el IPM de Ciudad Paraiso: ipm, ics, 15 variables, COD_MZN) y
+  `poligono_Barrio_Obrero_V1.geojson` (limite). IPM en zona: min 0, max 25,6, media 9,1.
+- **Notebooks:** `BO_01_mapa_ipm.ipynb` (coropleta 4 niveles tipo calor),
+  `BO_03_mapa_ipm_dimensiones.ipynb` (coropletas por dimension + barras por manzana al
+  clic), `BO_04_analitica_ipm.ipynb` (barras comparativas Cali vs Comuna 9).
+- **Salida HTML:** `mapa_html/Barrio_obrero/` (bo_mapa_ipm.html, bo_mapa_ipm_dimensiones.html).
+- **Correcciones aplicadas (nacen corregidas):** paleta apta daltonismo azul->naranja (sin
+  verde/rojo); vacios = 0 (REDATAM); unidad "% de personas"; leyenda aclara que los cortes
+  8/15/25 son del proyecto (no el 33,3 del DANE); fuente rotulada Censo 2018 (DANE, CNPV);
+  5 dimensiones DANE (Educacion, Ninez y juventud, Trabajo, Salud, Vivienda y servicios).
+- Limite de Barrio Obrero en azul oscuro #1B4F8A.

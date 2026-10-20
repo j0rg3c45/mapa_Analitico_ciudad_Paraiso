@@ -38,6 +38,7 @@ data_processed_geo/
 # que ya estaba en el repo. El index.html tampoco se versiona (se regenera con
 # notebooks/99_indice_mapas.py).
 mapa_html/*.html
+mapa_html/**/*.html
 !mapa_html/Mapa_Visitas_Ciudad_Paraiso_v2.html
 
 # Nota: la geometria del territorio (GeoJSON de manzanas y
