@@ -258,4 +258,13 @@ Notebooks por poligono:
 - `BO_03_mapa_ipm_dimensiones.ipynb`: por dimension, limite oficial + 45 manzanas.
 - `BO_04_analitica_ipm.ipynb`: barras Cali vs Comuna 9.
 
-Pendiente opcional: decidir si BO_01 (V1, 16 manzanas) se descarta en favor del oficial.
+- `BO_03b_mapa_ipm_dimensiones_V1.ipynb`: por dimension con poligono V1 (16 manzanas) ->
+  `bo_mapa_ipm_dimensiones_v1.html`.
+
+Resumen de salidas HTML en `mapa_html/Barrio_obrero/` (2 poligonos x {IPM, dimensiones}):
+| Poligono | IPM | Dimensiones |
+| --- | --- | --- |
+| V1 (16 manzanas) | bo_mapa_ipm.html | bo_mapa_ipm_dimensiones_v1.html |
+| Oficial (45 manzanas) | bo_mapa_ipm_original.html | bo_mapa_ipm_dimensiones.html |
+
+Pendiente opcional: decidir si el par V1 (16 manzanas) se descarta en favor del oficial.
