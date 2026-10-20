@@ -235,3 +235,27 @@ zona **Barrio Obrero** (Comuna 9, Cali), 16 manzanas.
   8/15/25 son del proyecto (no el 33,3 del DANE); fuente rotulada Censo 2018 (DANE, CNPV);
   5 dimensiones DANE (Educacion, Ninez y juventud, Trabajo, Salud, Vivienda y servicios).
 - Limite de Barrio Obrero en azul oscuro #1B4F8A.
+
+### 7.1 Dos poligonos y el IPM completo (importante)
+
+Barrio Obrero tiene DOS geometrias de limite en `data/Barrio_Obrero_geojson/`:
+- `poligono_Barrio_Obrero_V1.geojson`: recorte pequeno (~136 mil m2). El archivo
+  `IPM_BARRIO_OBRERO_2_POLIGONOS/IPM_Barrio_Obrero_V1.geojson` (16 manzanas) estaba
+  recortado a ESTE poligono.
+- `Geojson_Barrio_Obrero.geojson`: **limite OFICIAL**, mas amplio (~377 mil m2). Contiene
+  **45 manzanas** del IPM, no 16. Con solo 16 el mapa se veia incompleto (manzanas cubrian
+  ~25% del poligono).
+
+Solucion: se genero `IPM_Barrio_Obrero_completo.geojson` (45 manzanas) recortando el
+IPM-Cali (`data/geojson/Mzn_ipm_variables.geojson`) al poligono oficial por centroide
+dentro. IPM: 0-40, media 13,6 (coherente con el 13,18 de referencia). Trae `ics` en 15
+manzanas (las que cruzan con el archivo de 16).
+
+Notebooks por poligono:
+- `BO_01_mapa_ipm.ipynb`: IPM con poligono V1 (16 manzanas).
+- `BO_02_mapa_ipm_original.ipynb`: IPM con limite OFICIAL + IPM completo (45 manzanas) ->
+  `bo_mapa_ipm_original.html`. zoom_start=15.
+- `BO_03_mapa_ipm_dimensiones.ipynb`: por dimension, limite oficial + 45 manzanas.
+- `BO_04_analitica_ipm.ipynb`: barras Cali vs Comuna 9.
+
+Pendiente opcional: decidir si BO_01 (V1, 16 manzanas) se descarta en favor del oficial.
