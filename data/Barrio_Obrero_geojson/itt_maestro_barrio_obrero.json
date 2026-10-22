@@ -1,0 +1,366 @@
+{
+ "resumen": [
+  {
+   "año": 2023,
+   "score_seguridad": 66.11,
+   "score_movilidad": 23.96,
+   "score_des_social": 48.61,
+   "score_entorno_u": 60.7,
+   "score_des_eco": 60.18,
+   "ITT": 51.7,
+   "nivel": "Consolidacion"
+  },
+  {
+   "año": 2024,
+   "score_seguridad": 36.88,
+   "score_movilidad": 57.99,
+   "score_des_social": 52.55,
+   "score_entorno_u": 64.3,
+   "score_des_eco": 93.72,
+   "ITT": 57.69,
+   "nivel": "Consolidacion"
+  },
+  {
+   "año": 2025,
+   "score_seguridad": 33.23,
+   "score_movilidad": 80.56,
+   "score_des_social": 44.95,
+   "score_entorno_u": 63.0,
+   "score_des_eco": 72.69,
+   "ITT": 56.85,
+   "nivel": "Consolidacion"
+  },
+  {
+   "año": 2026,
+   "score_seguridad": 66.81,
+   "score_movilidad": 84.38,
+   "score_des_social": 84.88,
+   "score_entorno_u": 57.2,
+   "score_des_eco": 71.31,
+   "ITT": 73.15,
+   "nivel": "Parcial (no comparable)"
+  }
+ ],
+ "trimestral": [
+  {
+   "periodo": "2023-Q1",
+   "año": 2023,
+   "trimestre": 1,
+   "ITT": 31.28
+  },
+  {
+   "periodo": "2023-Q2",
+   "año": 2023,
+   "trimestre": 2,
+   "ITT": 28.58
+  },
+  {
+   "periodo": "2023-Q3",
+   "año": 2023,
+   "trimestre": 3,
+   "ITT": 49.41
+  },
+  {
+   "periodo": "2023-Q4",
+   "año": 2023,
+   "trimestre": 4,
+   "ITT": 31.28
+  },
+  {
+   "periodo": "2024-Q1",
+   "año": 2024,
+   "trimestre": 1,
+   "ITT": 34.97
+  },
+  {
+   "periodo": "2024-Q2",
+   "año": 2024,
+   "trimestre": 2,
+   "ITT": 55.81
+  },
+  {
+   "periodo": "2024-Q3",
+   "año": 2024,
+   "trimestre": 3,
+   "ITT": 46.54
+  },
+  {
+   "periodo": "2024-Q4",
+   "año": 2024,
+   "trimestre": 4,
+   "ITT": 42.31
+  },
+  {
+   "periodo": "2025-Q1",
+   "año": 2025,
+   "trimestre": 1,
+   "ITT": 39.06
+  },
+  {
+   "periodo": "2025-Q2",
+   "año": 2025,
+   "trimestre": 2,
+   "ITT": 37.49
+  },
+  {
+   "periodo": "2025-Q3",
+   "año": 2025,
+   "trimestre": 3,
+   "ITT": 37.49
+  },
+  {
+   "periodo": "2025-Q4",
+   "año": 2025,
+   "trimestre": 4,
+   "ITT": 40.19
+  },
+  {
+   "periodo": "2026-Q1",
+   "año": 2026,
+   "trimestre": 1,
+   "ITT": 50.82
+  },
+  {
+   "periodo": "2026-Q2",
+   "año": 2026,
+   "trimestre": 2,
+   "ITT": 36.55
+  },
+  {
+   "periodo": "2026-Q3",
+   "año": 2026,
+   "trimestre": 3,
+   "ITT": 36.55
+  },
+  {
+   "periodo": "2026-Q4",
+   "año": 2026,
+   "trimestre": 4,
+   "ITT": 36.55
+  }
+ ],
+ "seguridad": [
+  {
+   "año": 2023,
+   "homicidios": 5,
+   "hurtos": 164,
+   "score_homicidios": 72.2,
+   "score_hurtos": 60.0,
+   "score_seguridad": 66.11
+  },
+  {
+   "año": 2024,
+   "homicidios": 9,
+   "hurtos": 222,
+   "score_homicidios": 50.0,
+   "score_hurtos": 23.8,
+   "score_seguridad": 36.88
+  },
+  {
+   "año": 2025,
+   "homicidios": 12,
+   "hurtos": 207,
+   "score_homicidios": 33.3,
+   "score_hurtos": 33.1,
+   "score_seguridad": 33.23
+  },
+  {
+   "año": 2026,
+   "homicidios": 7,
+   "hurtos": 144,
+   "score_homicidios": 61.1,
+   "score_hurtos": 72.5,
+   "score_seguridad": 66.81
+  }
+ ],
+ "movilidad": [
+  {
+   "año": 2023,
+   "siniestralidad": 33,
+   "lesionados": 24,
+   "mortales": 3,
+   "score_siniestralidad": 21.9,
+   "score_lesionados": 25.0,
+   "score_mortales": 25,
+   "score_movilidad": 23.96
+  },
+  {
+   "año": 2024,
+   "siniestralidad": 23,
+   "lesionados": 19,
+   "mortales": 1,
+   "score_siniestralidad": 53.1,
+   "score_lesionados": 45.8,
+   "score_mortales": 75,
+   "score_movilidad": 57.99
+  },
+  {
+   "año": 2025,
+   "siniestralidad": 16,
+   "lesionados": 14,
+   "mortales": 0,
+   "score_siniestralidad": 75.0,
+   "score_lesionados": 66.7,
+   "score_mortales": 100,
+   "score_movilidad": 80.56
+  },
+  {
+   "año": 2026,
+   "siniestralidad": 11,
+   "lesionados": 9,
+   "mortales": 1,
+   "score_siniestralidad": 90.6,
+   "score_lesionados": 87.5,
+   "score_mortales": 75,
+   "score_movilidad": 84.38
+  }
+ ],
+ "cohesion": [
+  {
+   "año": 2023,
+   "vif": 22,
+   "rinas": 86,
+   "spa": 53,
+   "score_vif": 65.7,
+   "score_rinas": 25.3,
+   "score_spa": 74.71,
+   "score_cohesion": 55.23
+  },
+  {
+   "año": 2024,
+   "vif": 21,
+   "rinas": 26,
+   "spa": 28,
+   "score_vif": 68.6,
+   "score_rinas": 88.4,
+   "score_spa": 89.41,
+   "score_cohesion": 82.13
+  },
+  {
+   "año": 2025,
+   "vif": 34,
+   "rinas": 55,
+   "spa": 138,
+   "score_vif": 31.4,
+   "score_rinas": 57.9,
+   "score_spa": 24.71,
+   "score_cohesion": 38.01
+  },
+  {
+   "año": 2026,
+   "vif": 16,
+   "rinas": 20,
+   "spa": 49,
+   "score_vif": 82.9,
+   "score_rinas": 94.7,
+   "score_spa": 77.06,
+   "score_cohesion": 84.88
+  }
+ ],
+ "entorno": [
+  {
+   "año": 2023,
+   "ndvi_mean": 0.0687,
+   "pct_verde_%": 6.4,
+   "area_verde_m2": 5154,
+   "densidad_arboles_arb_ha": 108.8,
+   "score_entorno_u": 60.7
+  },
+  {
+   "año": 2024,
+   "ndvi_mean": 0.0809,
+   "pct_verde_%": 8.6,
+   "area_verde_m2": 6938,
+   "densidad_arboles_arb_ha": 108.8,
+   "score_entorno_u": 64.3
+  },
+  {
+   "año": 2025,
+   "ndvi_mean": 0.0804,
+   "pct_verde_%": 7.8,
+   "area_verde_m2": 6245,
+   "densidad_arboles_arb_ha": 108.8,
+   "score_entorno_u": 63.0
+  },
+  {
+   "año": 2026,
+   "ndvi_mean": 0.0688,
+   "pct_verde_%": 4.3,
+   "area_verde_m2": 3469,
+   "densidad_arboles_arb_ha": 108.8,
+   "score_entorno_u": 57.2
+  }
+ ],
+ "educacion": [
+  {
+   "año": 2023,
+   "matricula": 750,
+   "desertores": 194.0,
+   "repitentes": 109,
+   "tasa_desercion_%": 25.87,
+   "tasa_repitencia_%": 14.53,
+   "score_educ_des": 13.7
+  },
+  {
+   "año": 2024,
+   "matricula": 709,
+   "desertores": 89.0,
+   "repitentes": 80,
+   "tasa_desercion_%": 12.55,
+   "tasa_repitencia_%": 11.28,
+   "score_educ_des": 30.0
+  },
+  {
+   "año": 2025,
+   "matricula": 762,
+   "desertores": 102.0,
+   "repitentes": 78,
+   "tasa_desercion_%": 13.39,
+   "tasa_repitencia_%": 10.24,
+   "score_educ_des": 29.8
+  },
+  {
+   "año": 2026,
+   "matricula": 867,
+   "desertores": null,
+   "repitentes": 104,
+   "tasa_desercion_%": null,
+   "tasa_repitencia_%": 12.0,
+   "score_educ_des": null
+  }
+ ],
+ "economico": [
+  {
+   "año": 2023,
+   "establecimientos_activos": 862,
+   "empleo_personas": 1710,
+   "score_establecimientos": 82.02,
+   "score_empleo": 83.3,
+   "score_des_eco": 60.18
+  },
+  {
+   "año": 2024,
+   "establecimientos_activos": 939,
+   "empleo_personas": 1762,
+   "score_establecimientos": 89.34,
+   "score_empleo": 85.84,
+   "score_des_eco": 93.72
+  },
+  {
+   "año": 2025,
+   "establecimientos_activos": 1016,
+   "empleo_personas": 1785,
+   "score_establecimientos": 96.67,
+   "score_empleo": 86.96,
+   "score_des_eco": 72.69
+  },
+  {
+   "año": 2026,
+   "establecimientos_activos": 1051,
+   "empleo_personas": 1750,
+   "score_establecimientos": 100.0,
+   "score_empleo": 85.25,
+   "score_des_eco": 71.31
+  }
+ ]
+}
