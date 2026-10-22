@@ -5,9 +5,9 @@
    "score_seguridad": 66.11,
    "score_movilidad": 23.96,
    "score_des_social": 48.61,
-   "score_entorno_u": 60.7,
+   "score_entorno_u": 30.6,
    "score_des_eco": 60.18,
-   "ITT": 51.7,
+   "ITT": 46.59,
    "nivel": "Consolidacion"
   },
   {
@@ -15,9 +15,9 @@
    "score_seguridad": 36.88,
    "score_movilidad": 57.99,
    "score_des_social": 52.55,
-   "score_entorno_u": 64.3,
+   "score_entorno_u": 32.7,
    "score_des_eco": 93.72,
-   "ITT": 57.69,
+   "ITT": 52.31,
    "nivel": "Consolidacion"
   },
   {
@@ -25,9 +25,9 @@
    "score_seguridad": 33.23,
    "score_movilidad": 80.56,
    "score_des_social": 44.95,
-   "score_entorno_u": 63.0,
+   "score_entorno_u": 32.4,
    "score_des_eco": 72.69,
-   "ITT": 56.85,
+   "ITT": 51.65,
    "nivel": "Consolidacion"
   },
   {
@@ -35,9 +35,9 @@
    "score_seguridad": 66.81,
    "score_movilidad": 84.38,
    "score_des_social": 84.88,
-   "score_entorno_u": 57.2,
+   "score_entorno_u": 31.7,
    "score_des_eco": 71.31,
-   "ITT": 73.15,
+   "ITT": 68.81,
    "nivel": "Parcial (no comparable)"
   }
  ],
@@ -46,97 +46,97 @@
    "periodo": "2023-Q1",
    "año": 2023,
    "trimestre": 1,
-   "ITT": 31.28
+   "ITT": 26.16
   },
   {
    "periodo": "2023-Q2",
    "año": 2023,
    "trimestre": 2,
-   "ITT": 28.58
+   "ITT": 23.46
   },
   {
    "periodo": "2023-Q3",
    "año": 2023,
    "trimestre": 3,
-   "ITT": 49.41
+   "ITT": 44.3
   },
   {
    "periodo": "2023-Q4",
    "año": 2023,
    "trimestre": 4,
-   "ITT": 31.28
+   "ITT": 26.16
   },
   {
    "periodo": "2024-Q1",
    "año": 2024,
    "trimestre": 1,
-   "ITT": 34.97
+   "ITT": 29.6
   },
   {
    "periodo": "2024-Q2",
    "año": 2024,
    "trimestre": 2,
-   "ITT": 55.81
+   "ITT": 50.43
   },
   {
    "periodo": "2024-Q3",
    "año": 2024,
    "trimestre": 3,
-   "ITT": 46.54
+   "ITT": 41.17
   },
   {
    "periodo": "2024-Q4",
    "año": 2024,
    "trimestre": 4,
-   "ITT": 42.31
+   "ITT": 36.93
   },
   {
    "periodo": "2025-Q1",
    "año": 2025,
    "trimestre": 1,
-   "ITT": 39.06
+   "ITT": 33.86
   },
   {
    "periodo": "2025-Q2",
    "año": 2025,
    "trimestre": 2,
-   "ITT": 37.49
+   "ITT": 32.29
   },
   {
    "periodo": "2025-Q3",
    "año": 2025,
    "trimestre": 3,
-   "ITT": 37.49
+   "ITT": 32.29
   },
   {
    "periodo": "2025-Q4",
    "año": 2025,
    "trimestre": 4,
-   "ITT": 40.19
+   "ITT": 34.99
   },
   {
    "periodo": "2026-Q1",
    "año": 2026,
    "trimestre": 1,
-   "ITT": 50.82
+   "ITT": 46.49
   },
   {
    "periodo": "2026-Q2",
    "año": 2026,
    "trimestre": 2,
-   "ITT": 36.55
+   "ITT": 32.21
   },
   {
    "periodo": "2026-Q3",
    "año": 2026,
    "trimestre": 3,
-   "ITT": 36.55
+   "ITT": 32.21
   },
   {
    "periodo": "2026-Q4",
    "año": 2026,
    "trimestre": 4,
-   "ITT": 36.55
+   "ITT": 32.21
   }
  ],
  "seguridad": [
@@ -260,35 +260,35 @@
  "entorno": [
   {
    "año": 2023,
-   "ndvi_mean": 0.0687,
-   "pct_verde_%": 6.4,
-   "area_verde_m2": 5154,
-   "densidad_arboles_arb_ha": 108.8,
-   "score_entorno_u": 60.7
+   "ndvi_mean": 0.0579,
+   "pct_verde_%": 4.9,
+   "area_verde_m2": 19130,
+   "densidad_arboles_arb_ha": 22.4,
+   "score_entorno_u": 30.6
   },
   {
    "año": 2024,
-   "ndvi_mean": 0.0809,
-   "pct_verde_%": 8.6,
-   "area_verde_m2": 6938,
-   "densidad_arboles_arb_ha": 108.8,
-   "score_entorno_u": 64.3
+   "ndvi_mean": 0.0769,
+   "pct_verde_%": 6.2,
+   "area_verde_m2": 24285,
+   "densidad_arboles_arb_ha": 22.4,
+   "score_entorno_u": 32.7
   },
   {
    "año": 2025,
-   "ndvi_mean": 0.0804,
-   "pct_verde_%": 7.8,
-   "area_verde_m2": 6245,
-   "densidad_arboles_arb_ha": 108.8,
-   "score_entorno_u": 63.0
+   "ndvi_mean": 0.0728,
+   "pct_verde_%": 6.0,
+   "area_verde_m2": 23294,
+   "densidad_arboles_arb_ha": 22.4,
+   "score_entorno_u": 32.4
   },
   {
    "año": 2026,
-   "ndvi_mean": 0.0688,
-   "pct_verde_%": 4.3,
-   "area_verde_m2": 3469,
-   "densidad_arboles_arb_ha": 108.8,
-   "score_entorno_u": 57.2
+   "ndvi_mean": 0.0717,
+   "pct_verde_%": 5.6,
+   "area_verde_m2": 21906,
+   "densidad_arboles_arb_ha": 22.4,
+   "score_entorno_u": 31.7
   }
  ],
  "educacion": [
